@@ -85,8 +85,8 @@
                     </div>
                 </div>
                 <div>
-                    <label for="notas" class="block text-sm font-medium text-gray-700">Notas Especiales</label>
-                    <textarea id="notas" name="notas" rows="2" placeholder="Alergias, tallas especiales, etc." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+                    <label for="detalles" class="block text-sm font-medium text-gray-700">Detalles, Tareas, Notas Especiales</label>
+                    <textarea id="detalles" name="detalles" rows="2" placeholder="Tareas a realizar, Detalles especiales (Alergias, tallas especiales, etc)" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                     <div>
@@ -107,10 +107,6 @@
                     </div>
                 </div>
                 <div>
-                    <label for="tareas" class="block text-sm font-medium text-gray-700">Tareas Asignadas</label>
-                    <textarea id="tareas" name="tareas" rows="3" placeholder="Describa las tareas especificas a realizar..." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                </div>
-                <div>
                     <label for="motivo" class="block text-sm font-medium text-gray-700">Motivo de la Asignacion</label>
                     <select id="motivo" name="motivo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                         <option>Nueva contratacion</option>
@@ -128,46 +124,53 @@
             <table class="w-full table-auto">
                 <thead>
                     <tr class="bg-gray-50">
-                        <th class="px-4 py-2 text-left"></th>
                         <th class="px-4 py-2 text-left">Trabajador</th>
-                        <th class="px-4 py-2 text-left">Cliente</th>
                         <th class="px-4 py-2 text-left">Turno</th>
                         <th class="px-4 py-2 text-left">Inicio</th>
                         <th class="px-4 py-2 text-left">Estado</th>
+                        <th class="px-4 py-2 text-left">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Remover</button></td>
                         <td class="border px-4 py-2">Maria Gonzalez</td>
-                        <td class="border px-4 py-2">Banco Estado</td>
                         <td class="border px-4 py-2">Mañana</td>
                         <td class="border px-4 py-2">2024-01-15</td>
-                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
+                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo (30 dias)</span></td>
+                        <td class="border px-4 py-2">
+                            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Remover</button>
+                            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Ver mas detalles</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Remover</button></td>
                         <td class="border px-4 py-2">Carlos Rodriguez</td>
-                        <td class="border px-4 py-2">Banco Estado</td>
                         <td class="border px-4 py-2">Tarde</td>
                         <td class="border px-4 py-2">2026-08-01</td>
                         <td class="border px-4 py-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">Nuevo</span></td>
+                        <td class="border px-4 py-2">
+                            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Remover</button>
+                            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Ver mas detalles</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Remover</button></td>
                         <td class="border px-4 py-2">Ana Lopez</td>
-                        <td class="border px-4 py-2">Banco Estado</td>
                         <td class="border px-4 py-2">Mañana</td>
                         <td class="border px-4 py-2">2025-03-10</td>
                         <td class="border px-4 py-2"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Cambio Pendiente</span></td>
+                        <td class="border px-4 py-2">
+                            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Remover</button>
+                            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Ver mas detalles</button>
+                        </td>
                     </tr>
                     <tr>
-                        <td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Remover</button></td>
                         <td class="border px-4 py-2">Juan Perez</td>
-                        <td class="border px-4 py-2">Banco Estado</td>
                         <td class="border px-4 py-2">Noche</td>
                         <td class="border px-4 py-2">2026-06-15</td>
-                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
+                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo (10 dias)</span></td>
+                        <td class="border px-4 py-2">
+                            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Remover</button>
+                            <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Ver mas detalles</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
