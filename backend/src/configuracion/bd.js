@@ -13,7 +13,7 @@ export async function connectDB() {
 			username: `${DB_USERNAME}`,
 			password: `${PASSWORD}`,
 			database: `${DATABASE}`,
-			entities: ["src/entities/**/*.js"],
+			entities: ["src/schema/**/*.js"],
 			synchronize: true,
 			logging: false,
 		});
