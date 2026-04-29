@@ -30,7 +30,7 @@ fi
 
 # configurar el entorno para el servidor
 echo "configurando el entorno"
-export DB_HOST="localhost"
+export HOST="localhost"
 export DB_PORT="$DB_PORT"
 export DB_USERNAME="$DB_USER"
 export DB_PASSWORD="$DB_PASSWORD"
@@ -46,7 +46,7 @@ if [ ! -d "node_modules" ]; then
 fi
 
 echo "ejecutando el backend..."
-echo "base de datos temporal corriendo en localhost:$DB_PORT"
+echo "base de datos temporal corriendo en $HOST:$DB_PORT"
 echo "presiona ctrl+c para detener el backend y la base de datos"
 trap 'echo "deteniendo contenedor..."; docker stop $NOMBRE_CONTENEDOR_DB; docker rm $NOMBRE_CONTENEDOR_DB; exit 0' INT
 npm run dev
