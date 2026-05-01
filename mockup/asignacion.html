@@ -1,92 +1,91 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Volumen de Personal - Empresa de Aseos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Volumen de Personal - Empresa de Aseos</title>
+	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <header class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">Empresa de Aseos</h1>
-            <nav>
-                <a href="dashboard.html" class="hover:underline mr-4">Dashboard</a>
-                <a href="index.html" class="hover:underline">Cerrar Sesion</a>
-            </nav>
-        </div>
-    </header>
-    <main class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">Volumen de Personal a Enviar</h2>
-        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-lg font-semibold mb-4">Evaluacion y Asignacion</h3>
-            <form class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="cliente" class="block text-sm font-medium text-gray-700">Tipo de Cliente</label>
-                        <select id="cliente" name="cliente" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option>Hospital</option>
-                            <option>Banco</option>
-                            <option>Universidad</option>
-                            <option>Empresa Publica</option>
-                            <option>Institucion</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="ubicacion" class="block text-sm font-medium text-gray-700">Ubicacion</label>
-                        <input type="text" id="ubicacion" name="ubicacion" placeholder="Ej: Hospital Regional" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-                <div>
-                    <label for="necesidad" class="block text-sm font-medium text-gray-700">Necesidad de Limpieza</label>
-                    <textarea id="necesidad" name="necesidad" rows="3" placeholder="Describa la necesidad especifica..." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="personal" class="block text-sm font-medium text-gray-700">Cantidad de Personal Recomendado</label>
-                        <input type="number" id="personal" name="personal" min="1" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="herramientas" class="block text-sm font-medium text-gray-700">Herramientas e Implementos</label>
-                        <input type="text" id="herramientas" name="herramientas" placeholder="Ej: Aspiradoras, productos quimicos" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Guardar Evaluacion</button>
-            </form>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold mb-4">Asignaciones Recientes</h3>
-            <table class="w-full table-auto">
-                <thead>
-                    <tr class="bg-gray-50">
-                        <th class="px-4 py-2 text-left"></th>
-                        <th class="px-4 py-2 text-left">Cliente</th>
-                        <th class="px-4 py-2 text-left">Ubicacion</th>
-                        <th class="px-4 py-2 text-left">Personal</th>
-                        <th class="px-4 py-2 text-left">Herramientas</th>
-                        <th class="px-4 py-2 text-left">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2"><a href="distribucionasignacion.html" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</a></td>
-                        <td class="border px-4 py-2">Hospital Regional</td>
-                        <td class="border px-4 py-2">Concepcion</td>
-                        <td class="border px-4 py-2">25</td>
-                        <td class="border px-4 py-2">Equipos especializados</td>
-                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2"><a href="distribucionasignacion.html" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</a></td>
-                        <td class="border px-4 py-2">Banco Estado</td>
-                        <td class="border px-4 py-2">Chillan</td>
-                        <td class="border px-4 py-2">4</td>
-                        <td class="border px-4 py-2">Herramientas basicas</td>
-                        <td class="border px-4 py-2"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Pendiente</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+	<header class="bg-blue-600 text-white p-4">
+		<div class="container mx-auto flex justify-between items-center">
+			<h1 class="text-xl font-bold">Empresa de Aseos</h1>
+			<nav>
+				<a href="dashboard.html" class="hover:underline mr-4">Dashboard</a>
+				<a href="index.html" class="hover:underline">Cerrar Sesion</a>
+			</nav>
+		</div>
+	</header>
+	<main class="container mx-auto p-6">
+		<h2 class="text-2xl font-bold mb-6">Volumen de Personal a Enviar</h2>
+		<div class="bg-white p-6 rounded-lg shadow-md mb-6">
+			<h3 class="text-lg font-semibold mb-4">Evaluacion y Asignacion</h3>
+			<form class="space-y-4">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div>
+						<label for="cliente" class="block text-sm font-medium text-gray-700">Tipo de Cliente</label>
+						<select id="cliente" name="cliente" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+							<option>Hospital</option>
+							<option>Banco</option>
+							<option>Universidad</option>
+							<option>Empresa Publica</option>
+							<option>Institucion</option>
+						</select>
+					</div>
+					<div>
+						<label for="ubicacion" class="block text-sm font-medium text-gray-700">Ubicacion</label>
+						<input type="text" id="ubicacion" name="ubicacion" placeholder="Ej: Hospital Regional" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+				</div>
+				<div>
+					<label for="necesidad" class="block text-sm font-medium text-gray-700">Necesidad de Limpieza</label>
+					<textarea id="necesidad" name="necesidad" rows="3" placeholder="Describa la necesidad especifica..." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+					<div>
+						<label for="personal" class="block text-sm font-medium text-gray-700">Cantidad de Personal Recomendado</label>
+						<input type="number" id="personal" name="personal" min="1" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+				</div>
+				<button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Guardar Evaluacion</button>
+			</form>
+		</div>
+		<div class="bg-white p-6 rounded-lg shadow-md">
+			<h3 class="text-lg font-semibold mb-4">Asignaciones Recientes</h3>
+			<table class="w-full table-auto">
+				<thead>
+					<tr class="bg-gray-50">
+						<th class="px-4 py-2 text-left">Acciones</th>
+						<th class="px-4 py-2 text-left">Cliente</th>
+						<th class="px-4 py-2 text-left">Ubicacion</th>
+						<th class="px-4 py-2 text-left">Personal</th>
+						<th class="px-4 py-2 text-left">Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="border px-4 py-2">
+							<button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Ver mas detalles</button>
+							<a href="distribucionasignacion.html" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Personal</a>
+						</td>
+						<td class="border px-4 py-2">Hospital Regional</td>
+						<td class="border px-4 py-2">Concepcion</td>
+						<td class="border px-4 py-2">25/25</td>
+						<td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
+					</tr>
+					<tr>
+						<td class="border px-4 py-2">
+							<button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Ver mas detalles</button>
+							<a href="distribucionasignacion.html" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Personal</a>
+						</td>
+						<td class="border px-4 py-2">Banco Estado</td>
+						<td class="border px-4 py-2">Chillan</td>
+						<td class="border px-4 py-2">4/10</td>
+						<td class="border px-4 py-2"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Pendiente</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
 </body>
 </html>
