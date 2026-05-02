@@ -12,6 +12,16 @@ bash prueba_backend.sh
 # Detalles de implementacion
 Trabajo en progreso, no completos aun, esto es una especificacion hasta ahora.
 
+# Proposicion
+Proposicion para la empresa de aseos:
+
+Se va a crear un sitio web que permita realizar las siguientes funciones:
+
+* Asignar lugares y volumen de personal a enviar
+* Poder ir asignando personal individualmente para una ubicacion con instrucciones y herramientas y horarios especificos
+* Poder administrar contratos de personal, pagos
+* Poder administrar contratos ejecutivos
+
 ## Backend (/api/)
 * [ ] POST /login - creacion de sesion y validacion de usuario/contraseña
 
