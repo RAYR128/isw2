@@ -146,7 +146,7 @@ router.get('/asignacion/:id/detalles', (req, res) => {
 	});
 });
 
-// ET /asignacion/{id}/distribucion - distribucion de personal en una asignacion especificacion, en un arreglo mostrando el ID del trabajador (se ven los datos con /contratos/personal/{PID}), el turno, inicio, estado
+// GET /asignacion/{id}/distribucion - distribucion de personal en una asignacion especificacion, en un arreglo mostrando el ID del trabajador (se ven los datos con /contratos/personal/{PID}), el turno, inicio, estado
 router.get('/asignacion/:id/distribucion', (req, res) => {
 	const id = parseInt(req.params.id);
 	const distribucion = distribuciones[id] || [];
