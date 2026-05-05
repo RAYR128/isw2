@@ -18,9 +18,6 @@ function DistribucionAsignacion() {
 		turno: '',
 		fecha_inicio: '',
 		duracion: '',
-		vestuario: [],
-		seguridad: [],
-		herramientas: [],
 		detalles: '',
 	});
 
@@ -103,9 +100,6 @@ function DistribucionAsignacion() {
 				turno: formularioDistribucion.turno,
 				fecha_inicio: formularioDistribucion.fecha_inicio,
 				duracion: formularioDistribucion.duracion,
-				vestuario: formularioDistribucion.vestuario,
-				seguridad: formularioDistribucion.seguridad,
-				herramientas: formularioDistribucion.herramientas,
 				detalles: formularioDistribucion.detalles,
 			});
 			cambiarDatosDistribucion({
@@ -113,9 +107,6 @@ function DistribucionAsignacion() {
 				turno: '',
 				fecha_inicio: '',
 				duracion: '',
-				vestuario: [],
-				seguridad: [],
-				herramientas: [],
 				detalles: '',
 			});
 			fetchData();
@@ -184,69 +175,6 @@ function DistribucionAsignacion() {
 							</div>
 						</div>
 						<div>
-							<label className="block text-sm font-medium text-gray-700 mb-2">Vestuario Basico</label>
-							<div className="space-y-2">
-								{['uniforme', 'zapatos', 'guantes'].map((item) => (
-									<label key={item} className="inline-flex items-center">
-										<input
-											type="checkbox"
-											name="vestuario"
-											value={item}
-											checked={formularioDistribucion.vestuario.includes(item)}
-											onChange={cambioFormulario}
-											className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-										/>
-										<span className="ml-2">
-											{item === 'uniforme' ? 'Uniforme completo' :
-											 item === 'zapatos' ? 'Zapatos de seguridad' : 'Guantes'}
-										</span>
-									</label>
-								))}
-							</div>
-						</div>
-						<div>
-							<label className="block text-sm font-medium text-gray-700 mb-2">Equipo de Seguridad</label>
-							<div className="space-y-2">
-								{['mascarilla', 'gafas', 'arnes'].map((item) => (
-									<label key={item} className="inline-flex items-center">
-										<input
-											type="checkbox"
-											name="seguridad"
-											value={item}
-											checked={formularioDistribucion.seguridad.includes(item)}
-											onChange={cambioFormulario}
-											className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-										/>
-										<span className="ml-2">
-											{item === 'mascarilla' ? 'Mascarilla N95' :
-											 item === 'gafas' ? 'Gafas de proteccion' : 'Arnes de seguridad'}
-										</span>
-									</label>
-								))}
-							</div>
-						</div>
-						<div>
-							<label className="block text-sm font-medium text-gray-700 mb-2">Herramientas Especializadas</label>
-							<div className="space-y-2">
-								{['aspiradora', 'productos', 'limpiavidrios'].map((item) => (
-									<label key={item} className="inline-flex items-center">
-										<input
-											type="checkbox"
-											name="herramientas"
-											value={item}
-											checked={formularioDistribucion.herramientas.includes(item)}
-											onChange={cambioFormulario}
-											className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-										/>
-										<span className="ml-2">
-											{item === 'aspiradora' ? 'Aspiradora industrial' :
-											 item === 'productos' ? 'Productos quimicos especializados' : 'Equipo limpiavidrios'}
-										</span>
-									</label>
-								))}
-							</div>
-						</div>
-						<div>
 							<label htmlFor="detalles" className="block text-sm font-medium text-gray-700">
 								Detalles, Tareas, Notas Especiales
 							</label>
@@ -255,8 +183,8 @@ function DistribucionAsignacion() {
 								name="detalles"
 								value={formularioDistribucion.detalles}
 								onChange={cambioFormulario}
-								rows="2"
-								placeholder="Tareas a realizar, Detalles especiales (Alergias, tallas especiales, etc)"
+								rows="5"
+								placeholder="Tareas a realizar, Detalles especiales (Alergias, herramientas, etc)"
 								className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 							/>
 						</div>

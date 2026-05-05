@@ -194,10 +194,10 @@ router.get('/asignacion/:id/personal/detalles', (req, res) => {
 	});
 });
 
-// POST /asignacion/{id}/personal/agregar - agregar un nuevo personal, trabajador, vestuario, equipo, herramientas, detalles, turno, boton "asignar personal" de nueva asignacion
+// POST /asignacion/{id}/personal/agregar - agregar un nuevo personal, trabajador, detalles, turno, boton "asignar personal" de nueva asignacion
 router.post('/asignacion/:id/personal/agregar', (req, res) => {
 	const id = parseInt(req.params.id);
-	const { trabajador, vestuario, seguridad, herramientas, detalles, turno, fecha_inicio, duracion } = req.body;
+	const { trabajador, detalles, turno, fecha_inicio, duracion } = req.body;
 
 	// Si no existe la distribucion aun, crearla
 	if (!distribuciones[id]) {
