@@ -18,7 +18,6 @@ function DistribucionAsignacion() {
 		turno: '',
 		fecha_inicio: '',
 		duracion: '',
-		motivo: '',
 		vestuario: [],
 		seguridad: [],
 		herramientas: [],
@@ -104,7 +103,6 @@ function DistribucionAsignacion() {
 				turno: formularioDistribucion.turno,
 				fecha_inicio: formularioDistribucion.fecha_inicio,
 				duracion: formularioDistribucion.duracion,
-				motivo: formularioDistribucion.motivo,
 				vestuario: formularioDistribucion.vestuario,
 				seguridad: formularioDistribucion.seguridad,
 				herramientas: formularioDistribucion.herramientas,
@@ -115,7 +113,6 @@ function DistribucionAsignacion() {
 				turno: '',
 				fecha_inicio: '',
 				duracion: '',
-				motivo: '',
 				vestuario: [],
 				seguridad: [],
 				herramientas: [],
@@ -144,7 +141,7 @@ function DistribucionAsignacion() {
 				return 'bg-green-100 text-green-800';
 			case 'Nuevo':
 				return 'bg-blue-100 text-blue-800';
-			case 'Cambio Pendiente':
+			case 'Pendiente':
 				return 'bg-yellow-100 text-yellow-800';
 			default:
 				return 'bg-gray-100 text-gray-800';
@@ -312,26 +309,6 @@ function DistribucionAsignacion() {
 									required
 								/>
 							</div>
-						</div>
-						<div>
-							<label htmlFor="motivo" className="block text-sm font-medium text-gray-700">
-								Motivo de la Asignacion
-							</label>
-							<select
-								id="motivo"
-								name="motivo"
-								value={formularioDistribucion.motivo}
-								onChange={cambioFormulario}
-								className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-								required
-							>
-								<option value="">Seleccionar...</option>
-								<option>Nueva contratacion</option>
-								<option>Redistribucion por expansion</option>
-								<option>Cambio de turno</option>
-								<option>Reemplazo temporal</option>
-								<option>Proyecto especial</option>
-							</select>
 						</div>
 						<button
 							type="submit"
