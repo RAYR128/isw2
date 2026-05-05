@@ -60,14 +60,7 @@ router.get('/contratos/personal/:id', (req, res) => {
 		return res.status(404).json({ mensaje: 'Contrato no encontrado' });
 	}
 
-	res.json({
-		nombre: contrato.nombre,
-		inicio: contrato.inicio,
-		duracion: contrato.duracion,
-		salario: contrato.salario,
-		ipc: contrato.ipc,
-		estado: contrato.estado
-	});
+	res.json(contrato);
 });
 
 // POST /contratos/personal - Crear un contrato, espera nombre del trabajador, fecha de inicio, duracion, tipo, salario, IPC
