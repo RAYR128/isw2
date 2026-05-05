@@ -54,7 +54,7 @@ router.get('/contratos/personal/:id', (req, res) => {
 	const contrato = contratosPersonal.find(c => c.id === id);
 
 	if (!contrato) {
-		return res.status(404).json({ message: 'Contrato no encontrado' });
+		return res.status(404).json({ mensaje: 'Contrato no encontrado' });
 	}
 
 	res.json({
@@ -94,7 +94,7 @@ router.post('/contratos/personal/:id', (req, res) => {
 	const contratoIndex = contratosPersonal.findIndex(c => c.id === id);
 
 	if (contratoIndex === -1) {
-		return res.status(404).json({ message: 'Contrato no encontrado' });
+		return res.status(404).json({ mensaje: 'Contrato no encontrado' });
 	}
 
 	contratosPersonal[contratoIndex] = {

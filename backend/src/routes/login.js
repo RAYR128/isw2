@@ -19,7 +19,7 @@ router.post('/login', (req, res) => {
 	} else {
 		res.status(401).json({
 			success: false,
-			message: 'Credenciales no validas'
+			mensaje: 'Credenciales no validas'
 		});
 	}
 });
