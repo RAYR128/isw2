@@ -44,8 +44,11 @@ const contratosPersonal = [
 
 // GET /contratos/personal - Contratos activos, retorna arreglo con IDs para usarlos en /contratos/personal/{id}
 router.get('/contratos/personal', (req, res) => {
-	const ids = contratosPersonal.map(c => c.id);
-	res.json(ids);
+	const workers = contratosPersonal.map(c => ({
+		id: c.id,
+		nombre: c.nombre
+	}));
+	res.json(workers);
 });
 
 // GET /contratos/personal/{id} - Retorna arreglo con nombre de trabajador, inicio, duracion, salario / IPC, y un estado

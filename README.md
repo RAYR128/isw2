@@ -27,6 +27,7 @@ Se va a crear un sitio web que permita realizar las siguientes funciones:
 * [X] porteo de mockup a react
 * [ ] implementacion de interaccion con DB del backend
 * [ ] implementacion de seguridad de api (chequeo token, ratelimit en login, etc)
+* [X] arreglar error en backend que muestra entradas invalidas en asignaciones?
 
 ## Backend (/api/)
 * [S] POST /login - creacion de sesion y validacion de usuario/contraseña
