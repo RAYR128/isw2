@@ -10,8 +10,7 @@ const asignaciones = [
 		ubicacion: 'Concepcion',
 		necesidad: 'Limpieza general de instalaciones',
 		personal_recomendado: 25,
-		estado: 'Activo',
-		herramientas: ['Aspiradoras', 'Productos quimicos', 'Equipos de limpieza']
+		estado: 'Activo'
 	},
 	{
 		id: 2,
@@ -19,8 +18,7 @@ const asignaciones = [
 		ubicacion: 'Chillan',
 		necesidad: 'Mantenimiento de oficinas',
 		personal_recomendado: 10,
-		estado: 'Pendiente',
-		herramientas: ['Aspiradoras', 'Limpiavidrios']
+		estado: 'Pendiente'
 	}
 ];
 
@@ -76,6 +74,11 @@ router.get('/asignacion', (req, res) => {
 	res.json(asignacionesResumen);
 });
 
+// function para determinar herramientas necesarias segun ubicacion, por ejemplo si es hospital se necesitan herramientas de bioseguridad, si es oficina se necesitan herramientas de limpieza general, etc
+function herramientasDeAcuerdoAUbicacion(ubicacion) {
+	return ['Aspiradoras', 'Productos quimicos', 'Equipos de limpieza']
+}
+
 // POST /crearAsignacion - creacion de cliente, ubicacion, necesidades, y cantidad de personal recomendado
 router.post('/crearAsignacion', (req, res) => {
 	const { cliente, ubicacion, necesidad, personal } = req.body;
@@ -87,8 +90,7 @@ router.post('/crearAsignacion', (req, res) => {
 		ubicacion,
 		necesidad,
 		personal_recomendado: parseInt(personal),
-		estado: 'Pendiente',
-		herramientas: []
+		estado: 'Pendiente'
 	};
 
 	asignaciones.push(newAsignacion);
@@ -139,7 +141,7 @@ router.get('/asignacion/:id/detalles', (req, res) => {
 		cliente: asignacion.cliente,
 		ubicacion: asignacion.ubicacion,
 		personal: asignacion.personal_recomendado,
-		herramientas: asignacion.herramientas,
+		herramientas: herramientasDeAcuerdoAUbicacion(asignacion.ubicacion),
 		estado: asignacion.estado
 	});
 });
