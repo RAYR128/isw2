@@ -37,7 +37,7 @@ const distribuciones = {
 		{
 			id_trabajador: 2,
 			turno: 'Tarde',
-			inicio: '2024-01-15',
+			inicio: '2026-06-15',
 			duracion: 30,
 			detalles: 'Limpieza de baños y cocinas'
 		}
@@ -100,7 +100,6 @@ router.post('/crearAsignacion', (req, res) => {
 // Calcular estado dinamicamente basado en duracion
 function calcularEstado(distribucion) {
 	const now = new Date();
-	const distribucion = distribuciones[id] || [];
 	let estado = 'Pendiente';
 	if (distribucion.length > 0) {
 		const hasActive = distribucion.some(d => {
@@ -152,13 +151,11 @@ router.get('/asignacion/:id/detalles', (req, res) => {
 router.get('/asignacion/:id/distribucion', (req, res) => {
 	const id = parseInt(req.params.id);
 	const distribucion = distribuciones[id] || [];
-
-	let estado = calcularEstado(distribucion);
 	res.json(distribucion.map(d => ({
 		id_trabajador: d.id_trabajador,
 		turno: d.turno,
 		inicio: d.inicio,
-		estado: estado
+		estado: calcularEstado([d])
 	})));
 });
 
