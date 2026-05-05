@@ -76,6 +76,10 @@ router.get('/asignacion', (req, res) => {
 
 // function para determinar herramientas necesarias segun ubicacion, por ejemplo si es hospital se necesitan herramientas de bioseguridad, si es oficina se necesitan herramientas de limpieza general, etc
 function herramientasDeAcuerdoAUbicacion(ubicacion) {
+	ubicacion = ubicacion.toLowerCase();
+	if(ubicacion.includes('hospital')) {
+		return ['Trajes de bioseguridad', 'Guantes', 'Mascarillas', 'Desinfectantes hospitalarios'];
+	}
 	return ['Aspiradoras', 'Productos quimicos', 'Equipos de limpieza']
 }
 
