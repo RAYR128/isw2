@@ -23,11 +23,13 @@ Se va a crear un sitio web que permita realizar las siguientes funciones:
 * Poder administrar contratos ejecutivos
 
 ## Desarrollo actual
+X = Listo
+S = Stub / Prototipando aun
+
 * [X] implementacion de stubs de backend
 * [X] porteo de mockup a react
 * [ ] implementacion de interaccion con DB del backend
-* [ ] implementacion de seguridad de api (chequeo token, ratelimit en login, etc)
-* [X] arreglar error en backend que muestra entradas invalidas en asignaciones?
+* [ ] implementacion de seguridad de api (chequeo token, ratelimit en login, etc)¿
 
 ## Backend (/api/)
 * [S] POST /login - creacion de sesion y validacion de usuario/contraseña
@@ -56,4 +58,4 @@ Se va a crear un sitio web que permita realizar las siguientes funciones:
 * [S] /asignacion - asignacion.html - pagina de asignacion
 * [S] /asignacion/{id} - distribucionasignacion.html pagina de distribucion de personal para una asignacion
 * [S] /contratos/personal - contratospersonal.html pagina de contrato personal
-* [S] /contratos/ejecutivo - contratosejecutivo.html pagina de contrato ejecutivo
+* [ ] /contratos/ejecutivo - contratosejecutivo.html pagina de contrato ejecutivo
