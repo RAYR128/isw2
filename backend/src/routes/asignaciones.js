@@ -127,7 +127,6 @@ function calcularEstado(distribucion) {
 	return estado;
 }
 
-
 // GET /asignacion/{id}/detalles - detalles de una asignacion especifica, retorna cliente, ubicacion, personal y cantidad recomendada, herramientas, y estado
 router.get('/asignacion/:id/detalles', (req, res) => {
 	const id = parseInt(req.params.id);
@@ -136,14 +135,12 @@ router.get('/asignacion/:id/detalles', (req, res) => {
 	if (!asignacion) {
 		return res.status(404).json({ mensaje: 'Asignacion no encontrada' });
 	}
-
-	let estado = calcularEstado(distribuciones[id] || []);
 	res.json({
 		cliente: asignacion.cliente,
 		ubicacion: asignacion.ubicacion,
 		personal: asignacion.personal_recomendado,
 		herramientas: asignacion.herramientas,
-		estado: estado
+		estado: asignacion.estado
 	});
 });
 
@@ -182,7 +179,6 @@ router.get('/asignacion/:id/personal/detalles', (req, res) => {
 	}
 
 	const personal = distribuciones[id].find(d => d.id_trabajador === parseInt(id_trabajador));
-
 	if (!personal) {
 		return res.status(404).json({ mensaje: 'Personal no encontrado en esta asignacion' });
 	}
@@ -192,7 +188,7 @@ router.get('/asignacion/:id/personal/detalles', (req, res) => {
 	res.json({
 		turno: personal.turno,
 		inicio: personal.inicio,
-		estado: personal.estado,
+		estado: calcularEstado([personal]),
 		duracion: personal.duracion,
 		detalles: personal.detalles
 	});
