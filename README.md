@@ -29,7 +29,8 @@ S = Stub / Prototipando aun
 * [X] implementacion de stubs de backend
 * [X] porteo de mockup a react
 * [ ] implementacion de interaccion con DB del backend
-* [ ] implementacion de seguridad de api (chequeo token, ratelimit en login, etc)¿
+* [ ] implementacion de seguridad de api (chequeo token, ratelimit en login, etc)
+* [ ] implementar controller, service, rutas correctas de interaccion
 
 ## Backend (/api/)
 * [S] POST /login - creacion de sesion y validacion de usuario/contraseña
