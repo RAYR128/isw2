@@ -3,6 +3,8 @@
 set -e
 
 # variables de configuracion
+# nota futura: el repo va a utilizar pnpm enves de npm en actualizaciones futuras, debido a preocupaciones por tema de seguridad de paquetes.
+COMANDO_NPM="pnpm"
 NOMBRE_CONTENEDOR_DB="temp_postgres_db"
 DB_NAME="temp_db"
 DB_USER="temp_user"
@@ -42,11 +44,11 @@ export COOKIE_KEY="temp_cookie_key"
 echo "inicializando backend"
 cd backend
 if [ ! -d "node_modules" ]; then
-	pnpm install
+	$COMANDO_NPM install
 fi
 
 echo "ejecutando el backend..."
 echo "base de datos temporal corriendo en $HOST:$DB_PORT"
 echo "presiona ctrl+c para detener el backend y la base de datos"
 trap 'echo "deteniendo contenedor..."; docker stop $NOMBRE_CONTENEDOR_DB; docker rm $NOMBRE_CONTENEDOR_DB; exit 0' INT
-pnpm run dev
+$COMANDO_NPM run dev
