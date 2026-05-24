@@ -7,6 +7,14 @@ Codigo fuente para el proyecto de ISW para la empresa de aseos.
 ```bash
 # ejecutar prueba de backend en linux
 bash prueba_backend.sh
+
+# ejecutar prueba de frontend en linux
+bash prueba_frontend.sh
+```
+
+```batch
+.\prueba_frontend.bat
+.\prueba_backend.bat
 ```
 
 # Detalles de implementacion
