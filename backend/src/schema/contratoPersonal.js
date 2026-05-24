@@ -1,42 +1,39 @@
 import { EntitySchema } from "typeorm";
 
-export const Usuario = new EntitySchema({
-	name: "Usuario",
-	tableName: "usuarios",
+export const ContratoPersonal = new EntitySchema({
+	name: "ContratoPersonal",
+	tableName: "contratos_personal",
 	columns: {
 		id: {
 			primary: true,
 			type: "int",
 			generated: "increment",
 		},
-		username: {
-			type: "varchar",
-			length: 100,
-			unique: true,
-			nullable: false,
-		},
-		password: {
-			type: "varchar",
-			length: 255,
-			nullable: false,
-		},
 		nombre: {
 			type: "varchar",
 			length: 255,
 			nullable: false,
-			default: "Usuario",
 		},
-		rol: {
-			type: "varchar",
-			length: 50,
+		inicio: {
+			type: "date",
 			nullable: false,
-			default: "admin",
 		},
-		email: {
-			type: "varchar",
-			length: 255,
-			unique: true,
-			nullable: true,
+		duracion_anos: {
+			type: "int",
+			nullable: false,
+			default: 1,
+		},
+		salario: {
+			type: "int",
+			nullable: false,
+			default: 0,
+		},
+		ipc: {
+			type: "numeric",
+			precision: 5,
+			scale: 2,
+			nullable: false,
+			default: 0,
 		},
 		created_at: {
 			type: "timestamp",
