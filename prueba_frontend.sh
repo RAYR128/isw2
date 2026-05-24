@@ -6,9 +6,9 @@ set -e
 echo "inicializando frontend"
 cd frontend
 if [ ! -d "node_modules" ]; then
-	npm install
+	pnpm install
 fi
 
 echo "ejecutando el frontend..."
 echo "presiona ctrl+c para detener el frontend"
-npm run dev
+pnpm run dev

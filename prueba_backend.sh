@@ -42,11 +42,11 @@ export COOKIE_KEY="temp_cookie_key"
 echo "inicializando backend"
 cd backend
 if [ ! -d "node_modules" ]; then
-	npm install
+	pnpm install
 fi
 
 echo "ejecutando el backend..."
 echo "base de datos temporal corriendo en $HOST:$DB_PORT"
 echo "presiona ctrl+c para detener el backend y la base de datos"
 trap 'echo "deteniendo contenedor..."; docker stop $NOMBRE_CONTENEDOR_DB; docker rm $NOMBRE_CONTENEDOR_DB; exit 0' INT
-npm run dev
+pnpm run dev
