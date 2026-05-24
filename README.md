@@ -23,10 +23,14 @@ Se va a crear un sitio web que permita realizar las siguientes funciones:
 * Poder administrar contratos ejecutivos
 
 ## Desarrollo actual
+X = Listo
+S = Stub / Prototipando aun
+
 * [X] implementacion de stubs de backend
 * [X] porteo de mockup a react
 * [ ] implementacion de interaccion con DB del backend
 * [ ] implementacion de seguridad de api (chequeo token, ratelimit en login, etc)
+* [ ] implementar controller, service, rutas correctas de interaccion
 
 ## Backend (/api/)
 * [S] POST /login - creacion de sesion y validacion de usuario/contraseña
@@ -34,11 +38,11 @@ Se va a crear un sitio web que permita realizar las siguientes funciones:
 ### Asignaciones
 * [S] POST /crearAsignacion - creacion de cliente, ubicacion, necesidades, y cantidad de personal recomendado
 * [S] GET /asignacion - mostrar todas las asignaciones
-* [S] GET /asignacion/{id}/detalles - detalles de una asignacion especifica, retorna cliente, ubicacion, personal y cantidad recomendada, herramientas, y estado
-* [S] GET /asignacion/{id}/distribucion - distribucion de personal en una asignacion especificacion, en un arreglo mostrando el ID del trabajador (se ven los datos con /contratos/personal/{PID}), el turno, inicio, estado
+* [S] GET /asignacion/{id}/detalles - detalles de una asignacion especifica, retorna cliente, ubicacion, personal y cantidad recomendada, herramientas (de acuerdo a ubicacion), y estado
+* [S] GET /asignacion/{id}/distribucion - distribucion de personal en una asignacion especificacion, en un arreglo mostrando el ID del trabajador (se ven los datos con /contratos/personal/{PID}), el turno, inicio, estado (calculado por inicio, duracion)
 * [S] POST /asignacion/{id}/personal/remover - remover un personal de una asignacion, boton "remover" de distribuciones actuales
 * [S] GET /asignacion/{id}/personal/detalles - ver las tareas/detalles de un personal de una asignacion, boton "ver mas detalles" de distribuciones actuales
-* [S] POST /asignacion/{id}/personal/agregar - agregar un nuevo personal, trabajador, vestuario, equipo, herramientas, detalles, turno, motivo, boton "asignar personal" de nueva asignacion
+* [S] POST /asignacion/{id}/personal/agregar - agregar un nuevo personal, trabajador, detalles, turno, boton "asignar personal" de nueva asignacion
 
 ### Contratos - Personal
 * [S] GET /contratos/personal - Contratos activos, retorna arreglo con IDs para usarlos en /contratos/personal/{id}
@@ -55,4 +59,4 @@ Se va a crear un sitio web que permita realizar las siguientes funciones:
 * [S] /asignacion - asignacion.html - pagina de asignacion
 * [S] /asignacion/{id} - distribucionasignacion.html pagina de distribucion de personal para una asignacion
 * [S] /contratos/personal - contratospersonal.html pagina de contrato personal
-* [S] /contratos/ejecutivo - contratosejecutivo.html pagina de contrato ejecutivo
+* [ ] /contratos/ejecutivo - contratosejecutivo.html pagina de contrato ejecutivo

@@ -1,4 +1,5 @@
 import express from 'express';
+import { JWT_SECRET } from '../configuracion/env.js';
 
 const router = express.Router();
 
@@ -9,7 +10,7 @@ router.post('/login', (req, res) => {
 		// A hacer: Algun tipo de funcion para validar los tokens en todas las API? Aun no tengo idea de como implementar eso.
 		res.json({
 			success: true,
-			token: 'rellenar-token-futuro',
+			token: JWT_SECRET,
 			user: {
 				id: 1,
 				nombre: 'Administrador',
