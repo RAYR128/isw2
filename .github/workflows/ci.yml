@@ -19,6 +19,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Chequeo frontend
+        run: |
+          pwd
+          ls -la frontend || echo "Frontend no encontrado"
+
       - name: Instalar pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -63,6 +68,11 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Chequeo backend
+        run: |
+          pwd
+          ls -la backend || echo "Backend no encontrado"
 
       - name: Instalar pnpm
         uses: pnpm/action-setup@v4
