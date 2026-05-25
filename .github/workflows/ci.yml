@@ -15,14 +15,10 @@ jobs:
   frontend:
     name: Compilar Frontend
     runs-on: ubuntu-latest
+    working-directory: frontend
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Chequeo frontend
-        run: |
-          pwd
-          ls -la frontend || echo "Frontend no encontrado"
 
       - name: Instalar pnpm
         uses: pnpm/action-setup@v4
@@ -36,7 +32,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Instalar dependencias
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Lint
         run: pnpm lint
@@ -47,6 +43,7 @@ jobs:
   backend:
     name: Compilar Backend
     runs-on: ubuntu-latest
+    working-directory: backend
     services:
       postgres:
         image: postgres:13-alpine
@@ -66,11 +63,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Chequeo backend
-        run: |
-          pwd
-          ls -la backend || echo "Backend no encontrado"
-
       - name: Instalar pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -83,7 +75,7 @@ jobs:
           cache: 'pnpm'
 
       - name: Instalar dependencias
-        run: pnpm install
+        run: pnpm install --frozen-lockfile
 
       - name: Chequeo de sintaxis
         run: |
