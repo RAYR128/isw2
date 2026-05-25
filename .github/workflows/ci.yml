@@ -81,7 +81,7 @@ jobs:
           cache-dependency-path: backend/pnpm-lock.yaml
 
       - name: Instalar dependencias
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --unsafe-perm
 
       - name: Chequeo de sintaxis
         run: |
