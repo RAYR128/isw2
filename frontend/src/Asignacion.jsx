@@ -22,7 +22,7 @@ function Asignacion() {
 			try {
 				const data = await verAsignaciones();
 				actualizarAsignaciones(data);
-			} catch (err) {
+			} catch (_) {
 				mostrarErrorAsignaciones('Error al cargar asignaciones');
 			} finally {
 				estadoCargaAsignaciones(false);
@@ -53,7 +53,7 @@ function Asignacion() {
 			// Refrescar los datos..
 			const data = await verAsignaciones();
 			actualizarAsignaciones(data);
-		} catch (err) {
+		} catch (_) {
 			mostrarMensaje('Error al guardar la evaluacion');
 		} finally {
 			estadoCarga(false);

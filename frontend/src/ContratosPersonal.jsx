@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { verContratosPersonalIds, verContratoPersonal, crearContratoPersonal } from './api';
 import Header from "./GeneracionPagina";
 
@@ -17,10 +16,6 @@ function ContratosPersonal() {
 		ipc: '',
 	});
 
-	useEffect(() => {
-		verLosContratos();
-	}, []);
-
 	const verLosContratos = async () => {
 		try {
 			estadoCarga(true);
@@ -29,12 +24,16 @@ function ContratosPersonal() {
 				ids.map(contrato => verContratoPersonal(contrato.id))
 			);
 			verContratosP(contratosData);
-		} catch (err) {
+		} catch (_) {
 			mostrarError('Error al cargar los contratos');
 		} finally {
 			estadoCarga(false);
 		}
 	};
+
+	useEffect(() => {
+		verLosContratos();
+	}, []);
 
 	// Cambio de formulario
 	const cambioFormulario = (e) => {
@@ -63,7 +62,7 @@ function ContratosPersonal() {
 				ipc: '',
 			});
 			verLosContratos();
-		} catch (err) {
+		} catch (_) {
 			mostrarError('Error al crear el contrato');
 		}
 	};

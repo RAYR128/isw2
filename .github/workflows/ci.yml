@@ -1,0 +1,119 @@
+name: Integracion Continua
+
+on:
+  push:
+    branches: [ master, main ]
+  pull_request:
+    branches: [ master, main ]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  frontend:
+    name: Compilar Frontend
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Configurar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Instalar dependencias
+        working-directory: frontend
+        run: pnpm install --frozen-lockfile
+
+      - name: Lint
+        working-directory: frontend
+        run: pnpm lint
+
+      - name: Prueba build
+        working-directory: frontend
+        run: pnpm build
+
+  backend:
+    name: Compilar Backend
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13-alpine
+        env:
+          POSTGRES_DB: test_db
+          POSTGRES_USER: test_user
+          POSTGRES_PASSWORD: test_pass
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Instalar pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Configurar node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'pnpm'
+
+      - name: Instalar dependencias
+        working-directory: backend
+        run: pnpm install --frozen-lockfile
+
+      - name: Chequeo de sintaxis
+        working-directory: backend
+        run: |
+          find src -name "*.js" -exec node --check {} \;
+          echo "Todos los codigos del backend son validos"
+
+      - name: Prueba de humo de backend
+        working-directory: backend
+        env:
+          HOST: localhost
+          DB_PORT: 5432
+          DB_USERNAME: test_user
+          DB_PASSWORD: test_pass
+          DATABASE: test_db
+          JWT_SECRET: ci_test_secret
+          COOKIE_KEY: ci_test_cookie
+        run: |
+          echo "Iniciando servidor..."
+          node src/servidor.js > /tmp/backend.log 2>&1 &
+          SERVER_PID=$!
+          echo "SERVER_PID=$SERVER_PID"
+
+          echo "Prueba basica de API:"
+          for i in $(seq 1 20); do
+            if curl -s -f http://localhost:3000/api/asignacion > /dev/null 2>&1; then
+              echo "Respuesta de curl:"
+              curl -s http://localhost:3000/api/asignacion | head -c 300
+              kill $SERVER_PID 2>/dev/null || true
+              exit 0
+            fi
+            echo "Intento $i/20...."
+            sleep 1
+          done
+
+          echo "Backend fallo en responder a tiempo. Logs:"
+          cat /tmp/backend.log
+          kill $SERVER_PID 2>/dev/null || true
+          exit 1

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { verAsignacionDetalles, verAsignacionDistribucion, agregarPersonalAsignacion, removerPersonalAsignacion, verContratoPersonal, verContratosPersonalIds } from './api';
 import Header from "./GeneracionPagina";
 
@@ -21,22 +21,6 @@ function DistribucionAsignacion() {
 		detalles: '',
 	});
 
-	useEffect(() => {
-		fetchData();
-	}, [id]);
-
-	useEffect(() => {
-		const fetchWorkers = async () => {
-			try {
-				const workersData = await verContratosPersonalIds();
-				setWorkers(workersData);
-			} catch (err) {
-				console.error('Error fetching workers:', err);
-			}
-		};
-		fetchWorkers();
-	}, []);
-
 	const fetchData = async () => {
 		try {
 			estadoCarga(true);
@@ -54,18 +38,35 @@ function DistribucionAsignacion() {
 					try {
 						const contrato = await verContratoPersonal(item.id_trabajador);
 						names[item.id_trabajador] = contrato.nombre;
-					} catch (err) {
+					} catch (_) {
 						names[item.id_trabajador] = `Trabajador ${item.id_trabajador}`;
 					}
 				}
 			}
 			setWorkerNames(names);
-		} catch (err) {
+		} catch (_) {
 			mostrarError('Error al cargar los datos');
 		} finally {
 			estadoCarga(false);
 		}
 	};
+
+	useEffect(() => {
+		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [id]);
+
+	useEffect(() => {
+		const fetchWorkers = async () => {
+			try {
+				const workersData = await verContratosPersonalIds();
+				setWorkers(workersData);
+			} catch (_) {
+				console.error('Error fetching workers:');
+			}
+		};
+		fetchWorkers();
+	}, []);
 
 	// Cambio de formulario
 	const cambioFormulario = (e) => {
@@ -110,7 +111,7 @@ function DistribucionAsignacion() {
 				detalles: '',
 			});
 			fetchData();
-		} catch (err) {
+		} catch (_) {
 			mostrarError('Error al asignar personal');
 		}
 	};
@@ -120,7 +121,7 @@ function DistribucionAsignacion() {
 			try {
 				await removerPersonalAsignacion(id, { id_trabajador: idTrabajador });
 				fetchData();
-			} catch (err) {
+			} catch (_) {
 				mostrarError('Error al remover personal');
 			}
 		}
