@@ -19,11 +19,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Chequeo frontend
-        run: |
-          pwd
-          ls -la frontend || echo "Frontend no encontrado"
-
       - name: Instalar pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -36,15 +31,12 @@ jobs:
           cache: 'pnpm'
 
       - name: Instalar dependencias
-        working-directory: frontend
         run: pnpm install --frozen-lockfile
 
       - name: Lint
-        working-directory: frontend
         run: pnpm lint
 
       - name: Prueba build
-        working-directory: frontend
         run: pnpm build
 
   backend:
@@ -69,11 +61,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Chequeo backend
-        run: |
-          pwd
-          ls -la backend || echo "Backend no encontrado"
-
       - name: Instalar pnpm
         uses: pnpm/action-setup@v4
         with:
@@ -86,17 +73,14 @@ jobs:
           cache: 'pnpm'
 
       - name: Instalar dependencias
-        working-directory: backend
         run: pnpm install --frozen-lockfile
 
       - name: Chequeo de sintaxis
-        working-directory: backend
         run: |
           find src -name "*.js" -exec node --check {} \;
           echo "Todos los codigos del backend son validos"
 
       - name: Prueba de humo de backend
-        working-directory: backend
         env:
           HOST: localhost
           DB_PORT: 5432
