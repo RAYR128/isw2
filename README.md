@@ -1,21 +1,38 @@
-# Proyecto ISW - empresa de aseos
+# Proyecto ISW (Grupo 10) - empresa de aseos
 Codigo fuente para el proyecto de ISW para la empresa de aseos.
 
+Integrantes:
+* Ricardo Yañez Rios
+
+Index:
 * [Requisitos](./REQUISITOS.md)
 
-# Pruebas
-```bash
-# ejecutar prueba de backend en linux
-bash prueba_backend.sh
+# Levantamiento
+## Variables de entorno
 
-# ejecutar prueba de frontend en linux
+## Prueba Local
+Linux:
+```bash
+bash prueba_backend.sh
 bash prueba_frontend.sh
 ```
 
+Windows:
 ```batch
 .\prueba_frontend.bat
 .\prueba_backend.bat
 ```
+
+## Variables de entorno
+| Variable    | Descripcion                                                             | Valor predeterminado |
+| HOST        | Dirección del host del servidor                                         | localhost |
+| PORT        | Puerto en el que escucha el servidor backend                            | 3000 |
+| DB_PORT     | Puerto de la base de datos (PostgreSQL)                                 | 5432 |
+| DB_USERNAME | Usuario de la base de datos                                             | temp_user |
+| DB_PASSWORD | Contraseña de la base de datos                                          | temp_password |
+| DATABASE    | Nombre de la base de datos                                              | temp_db |
+| JWT_SECRET  | Clave secreta para la generación de tokens JWT (crítica para seguridad) | temp_secret |
+| COOKIE_KEY  | Clave para el manejo de cookies                                         | temp_cookie |
 
 # Detalles de implementacion
 Trabajo en progreso, no completos aun, esto es una especificacion hasta ahora.
@@ -24,8 +41,9 @@ Trabajo en progreso, no completos aun, esto es una especificacion hasta ahora.
 * [X] implementacion de stubs de backend
 * [X] porteo de mockup a react
 * [X] implementacion de interaccion con DB del backend
-* [X] implementacion de seguridad de api (chequeo token, ratelimit en login, etc)
+* [X] implementacion de seguridad de api (chequeo token, etc)
 * [X] implementar controller, service, rutas correctas de interaccion
+* [ ] implementacion de ratelimits en login
 
 ## Backend (/api/)
 * [X] POST /login - creacion de sesion y validacion de usuario/contraseña
