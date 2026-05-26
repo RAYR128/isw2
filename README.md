@@ -25,14 +25,15 @@ Windows:
 
 ## Variables de entorno
 | Variable    | Descripcion                                                             | Valor predeterminado |
-| HOST        | Dirección del host del servidor                                         | localhost |
-| PORT        | Puerto en el que escucha el servidor backend                            | 3000 |
-| DB_PORT     | Puerto de la base de datos (PostgreSQL)                                 | 5432 |
-| DB_USERNAME | Usuario de la base de datos                                             | temp_user |
-| DB_PASSWORD | Contraseña de la base de datos                                          | temp_password |
-| DATABASE    | Nombre de la base de datos                                              | temp_db |
-| JWT_SECRET  | Clave secreta para la generación de tokens JWT (crítica para seguridad) | temp_secret |
-| COOKIE_KEY  | Clave para el manejo de cookies                                         | temp_cookie |
+| ----------- | ----------------------------------------------------------------------- | -------------------- |
+| HOST        | Dirección del host del servidor                                         | localhost            |
+| PORT        | Puerto en el que escucha el servidor backend                            | 3000                 |
+| DB_PORT     | Puerto de la base de datos (PostgreSQL)                                 | 5432                 |
+| DB_USERNAME | Usuario de la base de datos                                             | temp_user            |
+| DB_PASSWORD | Contraseña de la base de datos                                          | temp_password        |
+| DATABASE    | Nombre de la base de datos                                              | temp_db              |
+| JWT_SECRET  | Clave secreta para la generación de tokens JWT (crítica para seguridad) | temp_secret          |
+| COOKIE_KEY  | Clave para el manejo de cookies                                         | temp_cookie          |
 
 # Detalles de implementacion
 Trabajo en progreso, no completos aun, esto es una especificacion hasta ahora.
