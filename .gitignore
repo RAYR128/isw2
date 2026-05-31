@@ -15,8 +15,6 @@ package-lock.json
 logs
 *.log
 npm-debug.log*
-pnpm-lock.yaml
-pnpm-workspace.yaml
 yarn-debug.log*
 yarn-error.log*
 
@@ -41,7 +39,3 @@ pids
 # sistema
 .DS_Store
 Thumbs.db
-
-# windows
-data/
-postgresql.log

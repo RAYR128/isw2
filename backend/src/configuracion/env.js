@@ -9,5 +9,5 @@ export const DB_PORT = process.env.DB_PORT || 5432;
 export const DB_USERNAME = process.env.DB_USERNAME || "temp_user";
 export const PASSWORD = process.env.DB_PASSWORD || "temp_password";
 export const DATABASE = process.env.DATABASE || "temp_db";
-export const JWT_SECRET = process.env.JWT_SECRET || "temp_secret";
-export const cookieKey = process.env.COOKIE_KEY || "temp_cookie";
+export const JWT_SECRET = process.env.JWT_SECRET;
+export const cookieKey = process.env.COOKIE_KEY;

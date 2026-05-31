@@ -1,17 +1,17 @@
 import { EntitySchema } from "typeorm";
 
-export const Usuario = new EntitySchema({
-	name: "Usuario",
-	tableName: "usuarios",
+export const User = new EntitySchema({
+	name: "User",
+	tableName: "users",
 	columns: {
 		id: {
 			primary: true,
 			type: "int",
 			generated: "increment",
 		},
-		username: {
+		email: {
 			type: "varchar",
-			length: 100,
+			length: 255,
 			unique: true,
 			nullable: false,
 		},
@@ -19,24 +19,6 @@ export const Usuario = new EntitySchema({
 			type: "varchar",
 			length: 255,
 			nullable: false,
-		},
-		nombre: {
-			type: "varchar",
-			length: 255,
-			nullable: false,
-			default: "Usuario",
-		},
-		rol: {
-			type: "varchar",
-			length: 50,
-			nullable: false,
-			default: "admin",
-		},
-		email: {
-			type: "varchar",
-			length: 255,
-			unique: true,
-			nullable: true,
 		},
 		created_at: {
 			type: "timestamp",
