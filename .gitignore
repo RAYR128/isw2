@@ -39,3 +39,7 @@ pids
 # sistema
 .DS_Store
 Thumbs.db
+
+# windows
+data/
+postgresql.log

@@ -2,13 +2,16 @@
 # iniciar el frontend rapidamente
 set -e
 
+# nota futura: el repo va a utilizar pnpm enves de npm en actualizaciones futuras, debido a preocupaciones por tema de seguridad de paquetes.
+COMANDO_NPM="pnpm"
+
 # compilar y iniciar el frontend en modo desarrollo
 echo "inicializando frontend"
 cd frontend
 if [ ! -d "node_modules" ]; then
-	pnpm install
+	$COMANDO_NPM install
 fi
 
 echo "ejecutando el frontend..."
 echo "presiona ctrl+c para detener el frontend"
-pnpm run dev
+$COMANDO_NPM run dev

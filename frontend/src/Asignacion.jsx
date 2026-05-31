@@ -22,7 +22,7 @@ function Asignacion() {
 			try {
 				const data = await verAsignaciones();
 				actualizarAsignaciones(data);
-			} catch (err) {
+			} catch (_) {
 				mostrarErrorAsignaciones('Error al cargar asignaciones');
 			} finally {
 				estadoCargaAsignaciones(false);
@@ -53,7 +53,7 @@ function Asignacion() {
 			// Refrescar los datos..
 			const data = await verAsignaciones();
 			actualizarAsignaciones(data);
-		} catch (err) {
+		} catch (_) {
 			mostrarMensaje('Error al guardar la evaluacion');
 		} finally {
 			estadoCarga(false);
@@ -183,15 +183,12 @@ function Asignacion() {
 							<tbody>
 								{asignaciones.map((asignacion) => (
 									<tr key={asignacion.id}>
-										<td className="border px-4 py-2">
-											<button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mr-2">
-												Ver mas detalles
-											</button>
+										<td className="border px-2 py-2">
 											<Link
 												to={`/asignacion/${asignacion.id}`}
 												className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
 											>
-												Personal
+												Detalles & Personal
 											</Link>
 										</td>
 										<td className="border px-4 py-2">{asignacion.cliente}</td>

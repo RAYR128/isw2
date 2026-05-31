@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { verAsignacionDetalles, verAsignacionDistribucion, agregarPersonalAsignacion, removerPersonalAsignacion, verContratoPersonal, verContratosPersonalIds } from './api';
 import Header from "./GeneracionPagina";
 
@@ -18,28 +18,8 @@ function DistribucionAsignacion() {
 		turno: '',
 		fecha_inicio: '',
 		duracion: '',
-		motivo: '',
-		vestuario: [],
-		seguridad: [],
-		herramientas: [],
 		detalles: '',
 	});
-
-	useEffect(() => {
-		fetchData();
-	}, [id]);
-
-	useEffect(() => {
-		const fetchWorkers = async () => {
-			try {
-				const workersData = await verContratosPersonalIds();
-				setWorkers(workersData);
-			} catch (err) {
-				console.error('Error fetching workers:', err);
-			}
-		};
-		fetchWorkers();
-	}, []);
 
 	const fetchData = async () => {
 		try {
@@ -58,18 +38,35 @@ function DistribucionAsignacion() {
 					try {
 						const contrato = await verContratoPersonal(item.id_trabajador);
 						names[item.id_trabajador] = contrato.nombre;
-					} catch (err) {
+					} catch (_) {
 						names[item.id_trabajador] = `Trabajador ${item.id_trabajador}`;
 					}
 				}
 			}
 			setWorkerNames(names);
-		} catch (err) {
+		} catch (_) {
 			mostrarError('Error al cargar los datos');
 		} finally {
 			estadoCarga(false);
 		}
 	};
+
+	useEffect(() => {
+		fetchData();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [id]);
+
+	useEffect(() => {
+		const fetchWorkers = async () => {
+			try {
+				const workersData = await verContratosPersonalIds();
+				setWorkers(workersData);
+			} catch (_) {
+				console.error('Error fetching workers:');
+			}
+		};
+		fetchWorkers();
+	}, []);
 
 	// Cambio de formulario
 	const cambioFormulario = (e) => {
@@ -104,10 +101,6 @@ function DistribucionAsignacion() {
 				turno: formularioDistribucion.turno,
 				fecha_inicio: formularioDistribucion.fecha_inicio,
 				duracion: formularioDistribucion.duracion,
-				motivo: formularioDistribucion.motivo,
-				vestuario: formularioDistribucion.vestuario,
-				seguridad: formularioDistribucion.seguridad,
-				herramientas: formularioDistribucion.herramientas,
 				detalles: formularioDistribucion.detalles,
 			});
 			cambiarDatosDistribucion({
@@ -115,14 +108,10 @@ function DistribucionAsignacion() {
 				turno: '',
 				fecha_inicio: '',
 				duracion: '',
-				motivo: '',
-				vestuario: [],
-				seguridad: [],
-				herramientas: [],
 				detalles: '',
 			});
 			fetchData();
-		} catch (err) {
+		} catch (_) {
 			mostrarError('Error al asignar personal');
 		}
 	};
@@ -132,7 +121,7 @@ function DistribucionAsignacion() {
 			try {
 				await removerPersonalAsignacion(id, { id_trabajador: idTrabajador });
 				fetchData();
-			} catch (err) {
+			} catch (_) {
 				mostrarError('Error al remover personal');
 			}
 		}
@@ -144,7 +133,7 @@ function DistribucionAsignacion() {
 				return 'bg-green-100 text-green-800';
 			case 'Nuevo':
 				return 'bg-blue-100 text-blue-800';
-			case 'Cambio Pendiente':
+			case 'Pendiente':
 				return 'bg-yellow-100 text-yellow-800';
 			default:
 				return 'bg-gray-100 text-gray-800';
@@ -162,6 +151,8 @@ function DistribucionAsignacion() {
 					Distribucion de Personal segun Requerimientos para "{asignacion?.cliente || 'Cliente'}"
 				</h2>
 				<div className="bg-white p-6 rounded-lg shadow-md mb-6">
+					<h3 className="text-lg font-semibold mb-4">Descripcion y detalles</h3>
+					<p className="text-gray-700 mb-4">{asignacion?.necesidad || 'Sin descripcion disponible.'}</p>
 					<h3 className="text-lg font-semibold mb-4">Nueva Asignacion y Equipamiento a utilizar</h3>
 					<form onSubmit={formularioOnSubmit} className="space-y-4">
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -187,69 +178,6 @@ function DistribucionAsignacion() {
 							</div>
 						</div>
 						<div>
-							<label className="block text-sm font-medium text-gray-700 mb-2">Vestuario Basico</label>
-							<div className="space-y-2">
-								{['uniforme', 'zapatos', 'guantes'].map((item) => (
-									<label key={item} className="inline-flex items-center">
-										<input
-											type="checkbox"
-											name="vestuario"
-											value={item}
-											checked={formularioDistribucion.vestuario.includes(item)}
-											onChange={cambioFormulario}
-											className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-										/>
-										<span className="ml-2">
-											{item === 'uniforme' ? 'Uniforme completo' :
-											 item === 'zapatos' ? 'Zapatos de seguridad' : 'Guantes'}
-										</span>
-									</label>
-								))}
-							</div>
-						</div>
-						<div>
-							<label className="block text-sm font-medium text-gray-700 mb-2">Equipo de Seguridad</label>
-							<div className="space-y-2">
-								{['mascarilla', 'gafas', 'arnes'].map((item) => (
-									<label key={item} className="inline-flex items-center">
-										<input
-											type="checkbox"
-											name="seguridad"
-											value={item}
-											checked={formularioDistribucion.seguridad.includes(item)}
-											onChange={cambioFormulario}
-											className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-										/>
-										<span className="ml-2">
-											{item === 'mascarilla' ? 'Mascarilla N95' :
-											 item === 'gafas' ? 'Gafas de proteccion' : 'Arnes de seguridad'}
-										</span>
-									</label>
-								))}
-							</div>
-						</div>
-						<div>
-							<label className="block text-sm font-medium text-gray-700 mb-2">Herramientas Especializadas</label>
-							<div className="space-y-2">
-								{['aspiradora', 'productos', 'limpiavidrios'].map((item) => (
-									<label key={item} className="inline-flex items-center">
-										<input
-											type="checkbox"
-											name="herramientas"
-											value={item}
-											checked={formularioDistribucion.herramientas.includes(item)}
-											onChange={cambioFormulario}
-											className="rounded border-gray-300 text-blue-600 shadow-sm focus:border-blue-300 focus:ring focus:ring-blue-200 focus:ring-opacity-50"
-										/>
-										<span className="ml-2">
-											{item === 'aspiradora' ? 'Aspiradora industrial' :
-											 item === 'productos' ? 'Productos quimicos especializados' : 'Equipo limpiavidrios'}
-										</span>
-									</label>
-								))}
-							</div>
-						</div>
-						<div>
 							<label htmlFor="detalles" className="block text-sm font-medium text-gray-700">
 								Detalles, Tareas, Notas Especiales
 							</label>
@@ -258,8 +186,8 @@ function DistribucionAsignacion() {
 								name="detalles"
 								value={formularioDistribucion.detalles}
 								onChange={cambioFormulario}
-								rows="2"
-								placeholder="Tareas a realizar, Detalles especiales (Alergias, tallas especiales, etc)"
+								rows="5"
+								placeholder="Tareas a realizar, Detalles especiales (Alergias, herramientas, etc)"
 								className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
 							/>
 						</div>
@@ -312,26 +240,6 @@ function DistribucionAsignacion() {
 									required
 								/>
 							</div>
-						</div>
-						<div>
-							<label htmlFor="motivo" className="block text-sm font-medium text-gray-700">
-								Motivo de la Asignacion
-							</label>
-							<select
-								id="motivo"
-								name="motivo"
-								value={formularioDistribucion.motivo}
-								onChange={cambioFormulario}
-								className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
-								required
-							>
-								<option value="">Seleccionar...</option>
-								<option>Nueva contratacion</option>
-								<option>Redistribucion por expansion</option>
-								<option>Cambio de turno</option>
-								<option>Reemplazo temporal</option>
-								<option>Proyecto especial</option>
-							</select>
 						</div>
 						<button
 							type="submit"

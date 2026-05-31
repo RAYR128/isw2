@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { verContratosEjecutivo, crearContratoEjecutivo } from './api';
 import Header from "./GeneracionPagina";
 
@@ -20,21 +19,21 @@ function ContratosEjecutivo() {
 		comentarios: '',
 	});
 
-	useEffect(() => {
-		verLosContratos();
-	}, []);
-
 	const verLosContratos = async () => {
 		try {
 			estadoCarga(true);
 			const data = await verContratosEjecutivo();
 			verContratosP(data);
-		} catch (err) {
+		} catch (_) {
 			mostrarError('Error al cargar los contratos');
 		} finally {
 			estadoCarga(false);
 		}
 	};
+
+	useEffect(() => {
+		verLosContratos();
+	}, []);
 
 	// Cambio de formulario
 	const cambioFormulario = (e) => {
@@ -70,7 +69,7 @@ function ContratosEjecutivo() {
 				comentarios: '',
 			});
 			verLosContratos();
-		} catch (err) {
+		} catch (_) {
 			mostrarError('Error al iniciar el proceso de contratacion');
 		}
 	};
