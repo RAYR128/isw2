@@ -26,7 +26,7 @@ function ContratosPersonal() {
 			estadoCarga(true);
 			const ids = await verContratosPersonalIds();
 			const contratosData = await Promise.all(
-				ids.map(id => verContratoPersonal(id))
+				ids.map(contrato => verContratoPersonal(contrato.id))
 			);
 			verContratosP(contratosData);
 		} catch (err) {

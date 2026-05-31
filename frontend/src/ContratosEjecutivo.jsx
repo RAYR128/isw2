@@ -237,7 +237,7 @@ function ContratosEjecutivo() {
 							type="submit"
 							className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
 						>
-							Iniciar Proceso de Contratacion
+							Añadir Contrato
 						</button>
 						{error && (
 							<div className="text-red-600 text-sm mt-2">{error}</div>
@@ -277,39 +277,6 @@ function ContratosEjecutivo() {
 						</tbody>
 					</table>
 				</div>
-				{/* estoy teniendo segundas opiniones sobre la implementacion de esto, por ahora no
-				<div className="bg-white p-6 rounded-lg shadow-md mt-6">
-					<h3 className="text-lg font-semibold mb-4">Procesos de Contratacion en Curso</h3>
-					<table className="w-full table-auto">
-						<thead>
-							<tr className="bg-gray-50">
-								<th className="px-4 py-2 text-left">Cargo</th>
-								<th className="px-4 py-2 text-left">Candidatos</th>
-								<th className="px-4 py-2 text-left">Fecha Entrevista</th>
-								<th className="px-4 py-2 text-left">Estado</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td className="border px-4 py-2">Personal Quimico</td>
-								<td className="border px-4 py-2">3 candidatos</td>
-								<td className="border px-4 py-2">2026-08-20</td>
-								<td className="border px-4 py-2">
-									<span className="px-2 py-1 rounded bg-blue-100 text-blue-800">En Proceso</span>
-								</td>
-							</tr>
-							<tr>
-								<td className="border px-4 py-2">Especialista en Logistica</td>
-								<td className="border px-4 py-2">2 candidatos</td>
-								<td className="border px-4 py-2">2026-09-05</td>
-								<td className="border px-4 py-2">
-									<span className="px-2 py-1 rounded bg-yellow-100 text-yellow-800">Pendiente</span>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				*/}
 			</main>
 		</div>
 	);

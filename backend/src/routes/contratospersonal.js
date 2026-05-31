@@ -44,8 +44,11 @@ const contratosPersonal = [
 
 // GET /contratos/personal - Contratos activos, retorna arreglo con IDs para usarlos en /contratos/personal/{id}
 router.get('/contratos/personal', (req, res) => {
-	const ids = contratosPersonal.map(c => c.id);
-	res.json(ids);
+	const workers = contratosPersonal.map(c => ({
+		id: c.id,
+		nombre: c.nombre
+	}));
+	res.json(workers);
 });
 
 // GET /contratos/personal/{id} - Retorna arreglo con nombre de trabajador, inicio, duracion, salario / IPC, y un estado
@@ -57,14 +60,7 @@ router.get('/contratos/personal/:id', (req, res) => {
 		return res.status(404).json({ mensaje: 'Contrato no encontrado' });
 	}
 
-	res.json({
-		nombre: contrato.nombre,
-		inicio: contrato.inicio,
-		duracion: contrato.duracion,
-		salario: contrato.salario,
-		ipc: contrato.ipc,
-		estado: contrato.estado
-	});
+	res.json(contrato);
 });
 
 // POST /contratos/personal - Crear un contrato, espera nombre del trabajador, fecha de inicio, duracion, tipo, salario, IPC
