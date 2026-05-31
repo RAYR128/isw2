@@ -21,22 +21,13 @@
         <div class="bg-white p-6 rounded-lg shadow-md mb-6">
             <h3 class="text-lg font-semibold mb-4">Nuevo Contrato</h3>
             <form class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
                     <div>
                         <label for="trabajador" class="block text-sm font-medium text-gray-700">Nombre del Trabajador</label>
                         <input type="text" id="trabajador" name="trabajador" placeholder="Nombre completo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                     </div>
-                    <div>
-                        <label for="cliente" class="block text-sm font-medium text-gray-700">Cliente Asignado</label>
-                        <select id="cliente" name="cliente" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option>Hospital Regional</option>
-                            <option>Universidad de Concepcion</option>
-                            <option>Banco Estado</option>
-                            <option>Empresa Publica</option>
-                        </select>
-                    </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label for="inicio" class="block text-sm font-medium text-gray-700">Fecha de Inicio</label>
                         <input type="date" id="inicio" name="inicio" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
@@ -51,18 +42,6 @@
                             <option>5</option>
                         </select>
                     </div>
-                    <div>
-                        <label for="tipo" class="block text-sm font-medium text-gray-700">Tipo de Contrato</label>
-                        <select id="tipo" name="tipo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option>Tiempo Completo</option>
-                            <option>Medio Tiempo</option>
-                            <option>Temporal</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label for="necesidad" class="block text-sm font-medium text-gray-700">Necesidad de la Empresa</label>
-                    <textarea id="necesidad" name="necesidad" rows="3" placeholder="Describa la necesidad especifica del cliente..." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
                 </div>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
@@ -83,32 +62,32 @@
                 <thead>
                     <tr class="bg-gray-50">
                         <th class="px-4 py-2 text-left">Trabajador</th>
-                        <th class="px-4 py-2 text-left">Cliente</th>
                         <th class="px-4 py-2 text-left">Inicio</th>
                         <th class="px-4 py-2 text-left">Duracion</th>
+                        <th class="px-4 py-2 text-left">Salario & IPC</th>
                         <th class="px-4 py-2 text-left">Estado</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td class="border px-4 py-2">Maria Gonzalez</td>
-                        <td class="border px-4 py-2">Hospital Regional</td>
                         <td class="border px-4 py-2">2024-01-15</td>
                         <td class="border px-4 py-2">3 años</td>
+                        <td class="border px-4 py-2">350000 / 3.5%</td>
                         <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
                     </tr>
                     <tr>
                         <td class="border px-4 py-2">Carlos Rodriguez</td>
-                        <td class="border px-4 py-2">Universidad de Concepcion</td>
                         <td class="border px-4 py-2">2023-06-01</td>
                         <td class="border px-4 py-2">5 años</td>
+                        <td class="border px-4 py-2">350000 / 3.5%</td>
                         <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
                     </tr>
                     <tr>
                         <td class="border px-4 py-2">Ana Lopez</td>
-                        <td class="border px-4 py-2">Banco Estado</td>
                         <td class="border px-4 py-2">2025-03-10</td>
                         <td class="border px-4 py-2">2 años</td>
+                        <td class="border px-4 py-2">350000 / 3.5%</td>
                         <td class="border px-4 py-2"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Proximo a vencer</span></td>
                     </tr>
                 </tbody>
