@@ -10,8 +10,7 @@ const contratosPersonal = [
 		inicio: '2024-01-15',
 		duracion: '3 años',
 		salario: 350000,
-		ipc: 3.5,
-		estado: 'Activo'
+		ipc: 3.5
 	},
 	{
 		id: 2,
@@ -19,8 +18,7 @@ const contratosPersonal = [
 		inicio: '2023-06-01',
 		duracion: '5 años',
 		salario: 350000,
-		ipc: 3.5,
-		estado: 'Activo'
+		ipc: 3.5
 	},
 	{
 		id: 3,
@@ -28,8 +26,7 @@ const contratosPersonal = [
 		inicio: '2025-03-10',
 		duracion: '2 años',
 		salario: 350000,
-		ipc: 3.5,
-		estado: 'Proximo a vencer'
+		ipc: 3.5
 	},
 	{
 		id: 4,
@@ -37,10 +34,28 @@ const contratosPersonal = [
 		inicio: '2024-08-20',
 		duracion: '4 años',
 		salario: 360000,
-		ipc: 3.2,
-		estado: 'Activo'
+		ipc: 3.2
 	}
 ];
+
+// calcular el estado de cada contrato basado en la fecha de inicio y duración
+function calcularEstadoContrato(contrato) {
+	const hoy = new Date();
+	const inicio = new Date(contrato.inicio);
+	if(hoy < inicio) {
+		return 'Pendiente';
+	}
+	const duracionAnios = parseInt(contrato.duracion);
+	const fechaFin = new Date(inicio);
+	fechaFin.setFullYear(inicio.getFullYear() + duracionAnios);
+	const tiempoRestante = fechaFin - hoy;
+	if (tiempoRestante <= 0) {
+		return 'Vencido';
+	} else if (tiempoRestante <= 30 * 24 * 60 * 60 * 1000) {
+		return 'Proximo a vencer';
+	}
+	return 'Activo';
+}
 
 // GET /contratos/personal - Contratos activos, retorna arreglo con IDs para usarlos en /contratos/personal/{id}
 router.get('/contratos/personal', (req, res) => {
@@ -60,7 +75,14 @@ router.get('/contratos/personal/:id', (req, res) => {
 		return res.status(404).json({ mensaje: 'Contrato no encontrado' });
 	}
 
-	res.json(contrato);
+	res.json({
+		nombre: contrato.nombre,
+		inicio: contrato.inicio,
+		duracion: contrato.duracion,
+		salario: contrato.salario,
+		ipc: contrato.ipc,
+		estado: calcularEstadoContrato(contrato)
+	});
 });
 
 // POST /contratos/personal - Crear un contrato, espera nombre del trabajador, fecha de inicio, duracion, tipo, salario, IPC
@@ -74,8 +96,7 @@ router.post('/contratos/personal', (req, res) => {
 		inicio,
 		duracion: `${duracion} años`,
 		salario: parseInt(salario),
-		ipc: parseFloat(ipc),
-		estado: 'Activo'
+		ipc: parseFloat(ipc)
 	};
 
 	contratosPersonal.push(newContrato);

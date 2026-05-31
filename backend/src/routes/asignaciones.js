@@ -145,6 +145,7 @@ router.get('/asignacion/:id/detalles', (req, res) => {
 		cliente: asignacion.cliente,
 		ubicacion: asignacion.ubicacion,
 		personal: asignacion.personal_recomendado,
+		necesidad: asignacion.necesidad,
 		herramientas: herramientasDeAcuerdoAUbicacion(asignacion.ubicacion),
 		estado: asignacion.estado
 	});
