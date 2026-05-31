@@ -1,149 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Administracion de Contratacion - Empresa de Aseos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Administracion de Contratacion - Empresa de Aseos</title>
+	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <header class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">Empresa de Aseos</h1>
-            <nav>
-                <a href="dashboard.html" class="hover:underline mr-4">Dashboard</a>
-                <a href="index.html" class="hover:underline">Cerrar Sesion</a>
-            </nav>
-        </div>
-    </header>
-    <main class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">Contratacion de Personal Ejecutivo</h2>
-        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-lg font-semibold mb-4">Nueva Contratacion</h3>
-            <form class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Nombre del candidato" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="cargo" class="block text-sm font-medium text-gray-700">Cargo</label>
-                        <select id="cargo" name="cargo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option>Contador</option>
-                            <option>Prevencionista de Riesgos</option>
-                            <option>Personal Quimico</option>
-                            <option>Encargado de Ventas</option>
-                            <option>Gerente de Operaciones</option>
-                            <option>Especialista en Logistica</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="experiencia" class="block text-sm font-medium text-gray-700">Años de Experiencia</label>
-                        <input type="number" id="experiencia" name="experiencia" min="0" placeholder="5" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="salario" class="block text-sm font-medium text-gray-700">Salario Propuesto (CLP)</label>
-                        <input type="number" id="salario" name="salario" placeholder="800000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-                <div>
-                    <label for="especializacion" class="block text-sm font-medium text-gray-700">Especializacion/Requisitos</label>
-                    <textarea id="especializacion" name="especializacion" rows="3" placeholder="Describa la especializacion requerida, certificaciones, etc." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="fecha_entrevista" class="block text-sm font-medium text-gray-700">Fecha de Entrevista</label>
-                        <input type="date" id="fecha_entrevista" name="fecha_entrevista" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="prioridad" class="block text-sm font-medium text-gray-700">Prioridad</label>
-                        <select id="prioridad" name="prioridad" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option>Alta</option>
-                            <option>Media</option>
-                            <option>Baja</option>
-                        </select>
-                    </div>
-                </div>
-                <div>
-                    <label for="comentarios" class="block text-sm font-medium text-gray-700">Comentarios Adicionales</label>
-                    <textarea id="comentarios" name="comentarios" rows="2" placeholder="Notas sobre el candidato, referencias, etc." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
-                </div>
-                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Iniciar Proceso de Contratacion</button>
-            </form>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold mb-4">Personal Ejecutivo Actual</h3>
-            <table class="w-full table-auto">
-                <thead>
-                    <tr class="bg-gray-50">
-                        <th class="px-4 py-2 text-left"></th>
-                        <th class="px-4 py-2 text-left">Nombre</th>
-                        <th class="px-4 py-2 text-left">Cargo</th>
-                        <th class="px-4 py-2 text-left">Fecha de Contratacion</th>
-                        <th class="px-4 py-2 text-left">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</button></td>
-                        <td class="border px-4 py-2">Roberto Martinez</td>
-                        <td class="border px-4 py-2">Contador Principal</td>
-                        <td class="border px-4 py-2">2020-03-15</td>
-                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</button></td>
-                        <td class="border px-4 py-2">Maria Jose Silva</td>
-                        <td class="border px-4 py-2">Contador</td>
-                        <td class="border px-4 py-2">2021-08-20</td>
-                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</button></td>
-                        <td class="border px-4 py-2">Carlos Muñoz</td>
-                        <td class="border px-4 py-2">Encargado de Ventas</td>
-                        <td class="border px-4 py-2">2019-11-10</td>
-                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</button></td>
-                        <td class="border px-4 py-2">Ana Gonzalez</td>
-                        <td class="border px-4 py-2">Prevencionista de Riesgos</td>
-                        <td class="border px-4 py-2">2022-01-05</td>
-                        <td class="border px-4 py-2"><span class="bg-red-100 text-red-800 px-2 py-1 rounded">Inactivo</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md mt-6">
-            <h3 class="text-lg font-semibold mb-4">Procesos de Contratacion en Curso</h3>
-            <table class="w-full table-auto">
-                <thead>
-                    <tr class="bg-gray-50">
-                        <th class="px-4 py-2 text-left">Cargo</th>
-                        <th class="px-4 py-2 text-left">Candidatos</th>
-                        <th class="px-4 py-2 text-left">Fecha Entrevista</th>
-                        <th class="px-4 py-2 text-left">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2">Personal Quimico</td>
-                        <td class="border px-4 py-2">3 candidatos</td>
-                        <td class="border px-4 py-2">2026-08-20</td>
-                        <td class="border px-4 py-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">En Proceso</span></td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Especialista en Logistica</td>
-                        <td class="border px-4 py-2">2 candidatos</td>
-                        <td class="border px-4 py-2">2026-09-05</td>
-                        <td class="border px-4 py-2"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Pendiente</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+	<header class="bg-blue-600 text-white p-4">
+		<div class="container mx-auto flex justify-between items-center">
+			<h1 class="text-xl font-bold">Empresa de Aseos</h1>
+			<nav>
+				<a href="dashboard.html" class="hover:underline mr-4">Dashboard</a>
+				<a href="index.html" class="hover:underline">Cerrar Sesion</a>
+			</nav>
+		</div>
+	</header>
+	<main class="container mx-auto p-6">
+		<h2 class="text-2xl font-bold mb-6">Contratacion de Personal Ejecutivo</h2>
+		<div class="bg-white p-6 rounded-lg shadow-md mb-6">
+			<h3 class="text-lg font-semibold mb-4">Nueva Contratacion</h3>
+			<form class="space-y-4">
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div>
+						<label for="nombre" class="block text-sm font-medium text-gray-700">Nombre Completo</label>
+						<input type="text" id="nombre" name="nombre" placeholder="Nombre del candidato" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+					<div>
+						<label for="cargo" class="block text-sm font-medium text-gray-700">Cargo</label>
+						<select id="cargo" name="cargo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+							<option>Contador</option>
+							<option>Prevencionista de Riesgos</option>
+							<option>Personal Quimico</option>
+							<option>Encargado de Ventas</option>
+							<option>Gerente de Operaciones</option>
+							<option>Especialista en Logistica</option>
+						</select>
+					</div>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div>
+						<label for="experiencia" class="block text-sm font-medium text-gray-700">Años de Experiencia</label>
+						<input type="number" id="experiencia" name="experiencia" min="0" placeholder="5" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+					<div>
+						<label for="salario" class="block text-sm font-medium text-gray-700">Salario Propuesto (CLP)</label>
+						<input type="number" id="salario" name="salario" placeholder="800000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+				</div>
+				<div>
+					<label for="especializacion" class="block text-sm font-medium text-gray-700">Especializacion/Requisitos</label>
+					<textarea id="especializacion" name="especializacion" rows="3" placeholder="Describa la especializacion requerida, certificaciones, etc." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div>
+						<label for="fecha_entrevista" class="block text-sm font-medium text-gray-700">Fecha de Entrevista</label>
+						<input type="date" id="fecha_entrevista" name="fecha_entrevista" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+					<div>
+						<label for="prioridad" class="block text-sm font-medium text-gray-700">Prioridad</label>
+						<select id="prioridad" name="prioridad" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+							<option>Alta</option>
+							<option>Media</option>
+							<option>Baja</option>
+						</select>
+					</div>
+				</div>
+				<div>
+					<label for="comentarios" class="block text-sm font-medium text-gray-700">Comentarios Adicionales</label>
+					<textarea id="comentarios" name="comentarios" rows="2" placeholder="Notas sobre el candidato, referencias, etc." class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"></textarea>
+				</div>
+				<button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Iniciar Proceso de Contratacion</button>
+			</form>
+		</div>
+		<div class="bg-white p-6 rounded-lg shadow-md">
+			<h3 class="text-lg font-semibold mb-4">Personal Ejecutivo Actual</h3>
+			<table class="w-full table-auto">
+				<thead>
+					<tr class="bg-gray-50">
+						<th class="px-4 py-2 text-left"></th>
+						<th class="px-4 py-2 text-left">Nombre</th>
+						<th class="px-4 py-2 text-left">Cargo</th>
+						<th class="px-4 py-2 text-left">Fecha de Contratacion</th>
+						<th class="px-4 py-2 text-left">Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</button></td>
+						<td class="border px-4 py-2">Roberto Martinez</td>
+						<td class="border px-4 py-2">Contador Principal</td>
+						<td class="border px-4 py-2">2020-03-15</td>
+						<td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
+					</tr>
+					<tr>
+						<td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</button></td>
+						<td class="border px-4 py-2">Maria Jose Silva</td>
+						<td class="border px-4 py-2">Contador</td>
+						<td class="border px-4 py-2">2021-08-20</td>
+						<td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
+					</tr>
+					<tr>
+						<td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</button></td>
+						<td class="border px-4 py-2">Carlos Muñoz</td>
+						<td class="border px-4 py-2">Encargado de Ventas</td>
+						<td class="border px-4 py-2">2019-11-10</td>
+						<td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
+					</tr>
+					<tr>
+						<td class="border px-4 py-2"><button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Modificar</button></td>
+						<td class="border px-4 py-2">Ana Gonzalez</td>
+						<td class="border px-4 py-2">Prevencionista de Riesgos</td>
+						<td class="border px-4 py-2">2022-01-05</td>
+						<td class="border px-4 py-2"><span class="bg-red-100 text-red-800 px-2 py-1 rounded">Inactivo</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="bg-white p-6 rounded-lg shadow-md mt-6">
+			<h3 class="text-lg font-semibold mb-4">Procesos de Contratacion en Curso</h3>
+			<table class="w-full table-auto">
+				<thead>
+					<tr class="bg-gray-50">
+						<th class="px-4 py-2 text-left">Cargo</th>
+						<th class="px-4 py-2 text-left">Candidatos</th>
+						<th class="px-4 py-2 text-left">Fecha Entrevista</th>
+						<th class="px-4 py-2 text-left">Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="border px-4 py-2">Personal Quimico</td>
+						<td class="border px-4 py-2">3 candidatos</td>
+						<td class="border px-4 py-2">2026-08-20</td>
+						<td class="border px-4 py-2"><span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">En Proceso</span></td>
+					</tr>
+					<tr>
+						<td class="border px-4 py-2">Especialista en Logistica</td>
+						<td class="border px-4 py-2">2 candidatos</td>
+						<td class="border px-4 py-2">2026-09-05</td>
+						<td class="border px-4 py-2"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Pendiente</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
 </body>
 </html>

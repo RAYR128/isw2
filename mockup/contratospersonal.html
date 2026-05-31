@@ -1,98 +1,98 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contratos de Trabajo - Empresa de Aseos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Contratos de Trabajo - Empresa de Aseos</title>
+	<script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-gray-100">
-    <header class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">Empresa de Aseos</h1>
-            <nav>
-                <a href="dashboard.html" class="hover:underline mr-4">Dashboard</a>
-                <a href="index.html" class="hover:underline">Cerrar Sesion</a>
-            </nav>
-        </div>
-    </header>
-    <main class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">Contratos de Trabajos de los Trabajadores</h2>
-        <div class="bg-white p-6 rounded-lg shadow-md mb-6">
-            <h3 class="text-lg font-semibold mb-4">Nuevo Contrato</h3>
-            <form class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-                    <div>
-                        <label for="trabajador" class="block text-sm font-medium text-gray-700">Nombre del Trabajador</label>
-                        <input type="text" id="trabajador" name="trabajador" placeholder="Nombre completo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="inicio" class="block text-sm font-medium text-gray-700">Fecha de Inicio</label>
-                        <input type="date" id="inicio" name="inicio" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="duracion" class="block text-sm font-medium text-gray-700">Duracion (años)</label>
-                        <select id="duracion" name="duracion" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                        <label for="salario" class="block text-sm font-medium text-gray-700">Salario Base (CLP)</label>
-                        <input type="number" id="salario" name="salario" placeholder="Ej: 350000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                    <div>
-                        <label for="ajuste" class="block text-sm font-medium text-gray-700">Ajuste IPC (%)</label>
-                        <input type="number" id="ajuste" name="ajuste" step="0.1" placeholder="Ej: 3.5" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
-                    </div>
-                </div>
-                <button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Crear Contrato</button>
-            </form>
-        </div>
-        <div class="bg-white p-6 rounded-lg shadow-md">
-            <h3 class="text-lg font-semibold mb-4">Contratos Activos</h3>
-            <table class="w-full table-auto">
-                <thead>
-                    <tr class="bg-gray-50">
-                        <th class="px-4 py-2 text-left">Trabajador</th>
-                        <th class="px-4 py-2 text-left">Inicio</th>
-                        <th class="px-4 py-2 text-left">Duracion</th>
-                        <th class="px-4 py-2 text-left">Salario & IPC</th>
-                        <th class="px-4 py-2 text-left">Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="border px-4 py-2">Maria Gonzalez</td>
-                        <td class="border px-4 py-2">2024-01-15</td>
-                        <td class="border px-4 py-2">3 años</td>
-                        <td class="border px-4 py-2">350000 / 3.5%</td>
-                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Carlos Rodriguez</td>
-                        <td class="border px-4 py-2">2023-06-01</td>
-                        <td class="border px-4 py-2">5 años</td>
-                        <td class="border px-4 py-2">350000 / 3.5%</td>
-                        <td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
-                    </tr>
-                    <tr>
-                        <td class="border px-4 py-2">Ana Lopez</td>
-                        <td class="border px-4 py-2">2025-03-10</td>
-                        <td class="border px-4 py-2">2 años</td>
-                        <td class="border px-4 py-2">350000 / 3.5%</td>
-                        <td class="border px-4 py-2"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Proximo a vencer</span></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-    </main>
+	<header class="bg-blue-600 text-white p-4">
+		<div class="container mx-auto flex justify-between items-center">
+			<h1 class="text-xl font-bold">Empresa de Aseos</h1>
+			<nav>
+				<a href="dashboard.html" class="hover:underline mr-4">Dashboard</a>
+				<a href="index.html" class="hover:underline">Cerrar Sesion</a>
+			</nav>
+		</div>
+	</header>
+	<main class="container mx-auto p-6">
+		<h2 class="text-2xl font-bold mb-6">Contratos de Trabajos de los Trabajadores</h2>
+		<div class="bg-white p-6 rounded-lg shadow-md mb-6">
+			<h3 class="text-lg font-semibold mb-4">Nuevo Contrato</h3>
+			<form class="space-y-4">
+				<div class="grid grid-cols-1 md:grid-cols-1 gap-4">
+					<div>
+						<label for="trabajador" class="block text-sm font-medium text-gray-700">Nombre del Trabajador</label>
+						<input type="text" id="trabajador" name="trabajador" placeholder="Nombre completo" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div>
+						<label for="inicio" class="block text-sm font-medium text-gray-700">Fecha de Inicio</label>
+						<input type="date" id="inicio" name="inicio" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+					<div>
+						<label for="duracion" class="block text-sm font-medium text-gray-700">Duracion (años)</label>
+						<select id="duracion" name="duracion" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select>
+					</div>
+				</div>
+				<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+					<div>
+						<label for="salario" class="block text-sm font-medium text-gray-700">Salario Base (CLP)</label>
+						<input type="number" id="salario" name="salario" placeholder="Ej: 350000" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+					<div>
+						<label for="ajuste" class="block text-sm font-medium text-gray-700">Ajuste IPC (%)</label>
+						<input type="number" id="ajuste" name="ajuste" step="0.1" placeholder="Ej: 3.5" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+					</div>
+				</div>
+				<button type="submit" class="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Crear Contrato</button>
+			</form>
+		</div>
+		<div class="bg-white p-6 rounded-lg shadow-md">
+			<h3 class="text-lg font-semibold mb-4">Contratos Activos</h3>
+			<table class="w-full table-auto">
+				<thead>
+					<tr class="bg-gray-50">
+						<th class="px-4 py-2 text-left">Trabajador</th>
+						<th class="px-4 py-2 text-left">Inicio</th>
+						<th class="px-4 py-2 text-left">Duracion</th>
+						<th class="px-4 py-2 text-left">Salario & IPC</th>
+						<th class="px-4 py-2 text-left">Estado</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td class="border px-4 py-2">Maria Gonzalez</td>
+						<td class="border px-4 py-2">2024-01-15</td>
+						<td class="border px-4 py-2">3 años</td>
+						<td class="border px-4 py-2">350000 / 3.5%</td>
+						<td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
+					</tr>
+					<tr>
+						<td class="border px-4 py-2">Carlos Rodriguez</td>
+						<td class="border px-4 py-2">2023-06-01</td>
+						<td class="border px-4 py-2">5 años</td>
+						<td class="border px-4 py-2">350000 / 3.5%</td>
+						<td class="border px-4 py-2"><span class="bg-green-100 text-green-800 px-2 py-1 rounded">Activo</span></td>
+					</tr>
+					<tr>
+						<td class="border px-4 py-2">Ana Lopez</td>
+						<td class="border px-4 py-2">2025-03-10</td>
+						<td class="border px-4 py-2">2 años</td>
+						<td class="border px-4 py-2">350000 / 3.5%</td>
+						<td class="border px-4 py-2"><span class="bg-yellow-100 text-yellow-800 px-2 py-1 rounded">Proximo a vencer</span></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</main>
 </body>
 </html>
