@@ -22,11 +22,18 @@ Se va a crear un sitio web que permita realizar las siguientes funciones:
 * Poder administrar contratos de personal, pagos
 * Poder administrar contratos ejecutivos
 
+## Desarrollo actual
+* [X] implementacion de stubs de backend
+* [X] porteo de mockup a react
+* [ ] implementacion de interaccion con DB del backend
+* [ ] implementacion de seguridad de api (chequeo token, ratelimit en login, etc)
+
 ## Backend (/api/)
 * [S] POST /login - creacion de sesion y validacion de usuario/contraseña
 
 ### Asignaciones
 * [S] POST /crearAsignacion - creacion de cliente, ubicacion, necesidades, y cantidad de personal recomendado
+* [S] GET /asignacion - mostrar todas las asignaciones
 * [S] GET /asignacion/{id}/detalles - detalles de una asignacion especifica, retorna cliente, ubicacion, personal y cantidad recomendada, herramientas, y estado
 * [S] GET /asignacion/{id}/distribucion - distribucion de personal en una asignacion especificacion, en un arreglo mostrando el ID del trabajador (se ven los datos con /contratos/personal/{PID}), el turno, inicio, estado
 * [S] POST /asignacion/{id}/personal/remover - remover un personal de una asignacion, boton "remover" de distribuciones actuales
@@ -44,36 +51,8 @@ Se va a crear un sitio web que permita realizar las siguientes funciones:
 * [S] POST /contratos/ejecutivo
 
 ## Frontend
-Trabajo en progreso, portear mockup con Tailwind a React. La idea es reemplazar los mockups para que utilizen un CSS mas modificado, y despues utilizar codigo para contactar al backend para la informacion a rellenar en las paginas.
-
-* [ ] / - pagina de dashboard.html o login.html
-* [ ] /asignacion - asignacion.html - pagina de asignacion
-* [ ] /asignacion/{id} - distribucionasignacion.html pagina de distribucion de personal para una asignacion
-* [ ] /contratos/personal - contratospersonal.html pagina de contrato personal
-* [ ] /contratos/ejecutivo - contratosejecutivo.html pagina de contrato ejecutivo
-
-## Referencia algunos templates que son importantes
-### Header Pagina Dashboard
-```html
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplo - Empresa de Aseos</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-100">
-    <header class="bg-blue-600 text-white p-4">
-        <div class="container mx-auto flex justify-between items-center">
-            <h1 class="text-xl font-bold">Empresa de Aseos</h1>
-            <nav>
-                <a href="dashboard.html" class="hover:underline mr-4">Dashboard</a>
-                <a href="index.html" class="hover:underline">Cerrar Sesion</a>
-            </nav>
-        </div>
-    </header>
-    <main class="container mx-auto p-6">
-        <h2 class="text-2xl font-bold mb-6">Ejemplo</h2>
-    </main>
-</body>
-```
+* [S] / - pagina de dashboard.html o login.html
+* [S] /asignacion - asignacion.html - pagina de asignacion
+* [S] /asignacion/{id} - distribucionasignacion.html pagina de distribucion de personal para una asignacion
+* [S] /contratos/personal - contratospersonal.html pagina de contrato personal
+* [S] /contratos/ejecutivo - contratosejecutivo.html pagina de contrato ejecutivo

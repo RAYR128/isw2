@@ -64,6 +64,22 @@ const distribuciones = {
 	]
 };
 
+// GET /asignacion - lista todas las asignaciones con resumen
+router.get('/asignacion', (req, res) => {
+	const asignacionesResumen = asignaciones.map(asignacion => {
+		const distribucion = distribuciones[asignacion.id] || [];
+		const personalAsignado = distribucion.length;
+		return {
+			id: asignacion.id,
+			cliente: asignacion.cliente,
+			ubicacion: asignacion.ubicacion,
+			personal: `${personalAsignado}/${asignacion.personal_recomendado}`,
+			estado: asignacion.estado
+		};
+	});
+	res.json(asignacionesResumen);
+});
+
 // POST /crearAsignacion - creacion de cliente, ubicacion, necesidades, y cantidad de personal recomendado
 router.post('/crearAsignacion', (req, res) => {
 	const { cliente, ubicacion, necesidad, personal } = req.body;
@@ -91,7 +107,7 @@ router.get('/asignacion/:id/detalles', (req, res) => {
 	const asignacion = asignaciones.find(a => a.id === id);
 
 	if (!asignacion) {
-		return res.status(404).json({ message: 'Asignacion no encontrada' });
+		return res.status(404).json({ mensaje: 'Asignacion no encontrada' });
 	}
 
 	res.json({
@@ -122,11 +138,11 @@ router.post('/asignacion/:id/personal/remover', (req, res) => {
 	const { id_trabajador } = req.body;
 
 	if (!distribuciones[id]) {
-		return res.status(404).json({ message: 'Asignacion no encontrada' });
+		return res.status(404).json({ mensaje: 'Asignacion no encontrada' });
 	}
 
 	distribuciones[id] = distribuciones[id].filter(d => d.id_trabajador !== parseInt(id_trabajador));
-	res.json({ message: 'Personal removido exitosamente' });
+	res.json({ mensaje: 'Personal removido exitosamente' });
 });
 
 // GET /asignacion/{id}/personal/detalles - ver las tareas/detalles de un personal de una asignacion, boton "ver mas detalles" de distribuciones actuales
@@ -135,13 +151,13 @@ router.get('/asignacion/:id/personal/detalles', (req, res) => {
 	const { id_trabajador } = req.query;
 
 	if (!distribuciones[id]) {
-		return res.status(404).json({ message: 'Asignacion no encontrada' });
+		return res.status(404).json({ mensaje: 'Asignacion no encontrada' });
 	}
 
 	const personal = distribuciones[id].find(d => d.id_trabajador === parseInt(id_trabajador));
 
 	if (!personal) {
-		return res.status(404).json({ message: 'Personal no encontrado en esta asignacion' });
+		return res.status(404).json({ mensaje: 'Personal no encontrado en esta asignacion' });
 	}
 
 	// tenemos el ID del personal, en el futuro lo ideal seria parsear el id_trabajador
