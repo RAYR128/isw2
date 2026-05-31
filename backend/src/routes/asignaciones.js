@@ -76,10 +76,6 @@ router.get('/asignacion', (req, res) => {
 
 // function para determinar herramientas necesarias segun ubicacion, por ejemplo si es hospital se necesitan herramientas de bioseguridad, si es oficina se necesitan herramientas de limpieza general, etc
 function herramientasDeAcuerdoAUbicacion(ubicacion) {
-	ubicacion = ubicacion.toLowerCase();
-	if(ubicacion.includes('hospital')) {
-		return ['Trajes de bioseguridad', 'Guantes', 'Mascarillas', 'Desinfectantes hospitalarios'];
-	}
 	return ['Aspiradoras', 'Productos quimicos', 'Equipos de limpieza']
 }
 
@@ -145,13 +141,12 @@ router.get('/asignacion/:id/detalles', (req, res) => {
 		cliente: asignacion.cliente,
 		ubicacion: asignacion.ubicacion,
 		personal: asignacion.personal_recomendado,
-		necesidad: asignacion.necesidad,
 		herramientas: herramientasDeAcuerdoAUbicacion(asignacion.ubicacion),
 		estado: asignacion.estado
 	});
 });
 
-// GET /asignacion/{id}/distribucion - distribucion de personal en una asignacion especificacion, en un arreglo mostrando el ID del trabajador (se ven los datos con /contratos/personal/{PID}), el turno, inicio, estado
+// ET /asignacion/{id}/distribucion - distribucion de personal en una asignacion especificacion, en un arreglo mostrando el ID del trabajador (se ven los datos con /contratos/personal/{PID}), el turno, inicio, estado
 router.get('/asignacion/:id/distribucion', (req, res) => {
 	const id = parseInt(req.params.id);
 	const distribucion = distribuciones[id] || [];

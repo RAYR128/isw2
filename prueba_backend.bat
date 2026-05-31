@@ -9,11 +9,11 @@ set DB_PORT=5432
 echo creando directorio de datos...
 if not exist "data" (
     mkdir data
-    if exist "C:\pgsql\bin\initdb.exe" (
+    if exist "C:\VGXDB\pgsql\bin\initdb.exe" (
         echo inicializando base de datos...
-        "C:\pgsql\bin\initdb.exe" -D "data" --username=%DB_USER% --auth=trust
+        "C:\VGXDB\pgsql\bin\initdb.exe" -D "data" --username=%DB_USER% --auth=trust
     ) else (
-        echo Error: No se encontro initdb.exe en C:\pgsql\bin\
+        echo Error: No se encontro initdb.exe en C:\VGXDB\pgsql\bin\
         echo Asegurese de que PostgreSQL este instalado correctamente
         pause
         exit /b 1
@@ -27,11 +27,11 @@ if %ERRORLEVEL% EQU 0 (
 ) else (
     echo iniciando PostgreSQL...
     REM intentar iniciar PostgreSQL usando pg_ctl
-    if exist "C:\pgsql\bin\pg_ctl.exe" (
-        "C:\pgsql\bin\pg_ctl.exe" start -D "data" -l "postgresql.log" -o "-p %DB_PORT%"
+    if exist "C:\VGXDB\pgsql\bin\pg_ctl.exe" (
+        "C:\VGXDB\pgsql\bin\pg_ctl.exe" start -D "data" -l "postgresql.log" -o "-p %DB_PORT%"
         timeout /t 5 /nobreak >nul
     ) else (
-        echo Error: No se encontro pg_ctl.exe en C:\pgsql\bin\
+        echo Error: No se encontro pg_ctl.exe en C:\VGXDB\pgsql\bin\
         echo Asegurese de que PostgreSQL este instalado correctamente
         pause
         exit /b 1
@@ -47,8 +47,8 @@ if %ERRORLEVEL% NEQ 0 (
 )
 
 echo creando base de datos temporal si no existe...
-if exist "C:\pgsql\bin\createdb.exe" (
-    "C:\pgsql\bin\createdb.exe" -U %DB_USER% -p %DB_PORT% %DB_NAME% 2>nul
+if exist "C:\VGXDB\pgsql\bin\createdb.exe" (
+    "C:\VGXDB\pgsql\bin\createdb.exe" -U %DB_USER% -p %DB_PORT% %DB_NAME% 2>nul
     if %ERRORLEVEL% NEQ 0 (
         echo La base de datos %DB_NAME% ya existe o no se pudo crear
     ) else (

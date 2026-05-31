@@ -183,12 +183,15 @@ function Asignacion() {
 							<tbody>
 								{asignaciones.map((asignacion) => (
 									<tr key={asignacion.id}>
-										<td className="border px-2 py-2">
+										<td className="border px-4 py-2">
+											<button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 mr-2">
+												Ver mas detalles
+											</button>
 											<Link
 												to={`/asignacion/${asignacion.id}`}
 												className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
 											>
-												Detalles & Personal
+												Personal
 											</Link>
 										</td>
 										<td className="border px-4 py-2">{asignacion.cliente}</td>

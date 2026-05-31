@@ -150,8 +150,6 @@ function DistribucionAsignacion() {
 					Distribucion de Personal segun Requerimientos para "{asignacion?.cliente || 'Cliente'}"
 				</h2>
 				<div className="bg-white p-6 rounded-lg shadow-md mb-6">
-					<h3 className="text-lg font-semibold mb-4">Descripcion y detalles</h3>
-					<p className="text-gray-700 mb-4">{asignacion?.necesidad || 'Sin descripcion disponible.'}</p>
 					<h3 className="text-lg font-semibold mb-4">Nueva Asignacion y Equipamiento a utilizar</h3>
 					<form onSubmit={formularioOnSubmit} className="space-y-4">
 						<div className="grid grid-cols-1 md:grid-cols-2 gap-4">
