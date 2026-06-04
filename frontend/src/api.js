@@ -20,7 +20,11 @@ async function requestAPIinterna(endpoint, options = {}) {
 	try {
 		const respuesta = await fetch(url, config);
 		const datos = await respuesta.json();
-		if (!respuesta.ok) { throw new Error(datos.mensaje || 'Fallo de API'); }
+		if (!respuesta.ok) {
+			const error = new Error(datos.mensaje || 'Fallo de API')
+			error.mensaje = datos.mensaje || 'Fallo de API'
+			throw error
+		}
 		return datos;
 	} catch (error) {
 		console.error('Error de la API:', error);
