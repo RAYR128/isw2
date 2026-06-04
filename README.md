@@ -26,11 +26,7 @@ pnpm install
 
 ### Variables de Entorno (Backend)
 
-El backend carga las variables de entorno usando `dotenv` desde un archivo `.env` en la carpeta `backend/`.
-
-Puedes copiar los valores de los scripts de prueba como base.
-
-| Variable                        | Descripcion                                       | Valor por defecto          |
+| Variable                       | Descripcion                                        | Valor por defecto          |
 |--------------------------------|----------------------------------------------------|----------------------------|
 | `HOST`                         | Host en el que escucha el servidor Express         | `localhost`                |
 | `PORT`                         | Puerto del servidor backend                        | `3000`                     |
