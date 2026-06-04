@@ -1,7 +1,61 @@
 # Proyecto ISW - empresa de aseos
 Codigo fuente para el proyecto de ISW para la empresa de aseos.
 
-* [Requisitos](./REQUISITOS.md)
+* [Requisitos funcionales del sistema](./REQUISITOS.md)
+
+## Requisitos
+
+Para desarrollar y ejecutar este proyecto se requieren las siguientes herramientas:
+
+- **Node.js** >= 20 (recomendado: v22 LTS)
+- **pnpm** >= 9 (el proyecto usa pnpm para la gestion de paquetes)
+- **PostgreSQL** >= 13 (el backend usa TypeORM con PostgreSQL)
+- **Docker** (**opcional**: usado por `prueba_backend.sh` para levantar una base de datos temporal, no necesario en prod)
+
+### Instalacion de dependencias
+
+```bash
+# Backend
+cd backend
+pnpm install
+
+# Frontend
+cd ../frontend
+pnpm install
+```
+
+### Variables de Entorno (Backend)
+
+El backend carga las variables de entorno usando `dotenv` desde un archivo `.env` en la carpeta `backend/`.
+
+Puedes copiar los valores de los scripts de prueba como base.
+
+| Variable                        | Descripcion                                       | Valor por defecto          |
+|--------------------------------|----------------------------------------------------|----------------------------|
+| `HOST`                         | Host en el que escucha el servidor Express         | `localhost`                |
+| `PORT`                         | Puerto del servidor backend                        | `3000`                     |
+| `DB_PORT`                      | Puerto de PostgreSQL                               | `5432`                     |
+| `DB_USERNAME`                  | Usuario de la base de datos                        | `temp_user`                |
+| `DB_PASSWORD`                  | Contraseña de la base de datos                     | `temp_password`            | 
+| `DATABASE`                     | Nombre de la base de datos                         | `temp_db`                  |
+| `JWT_SECRET`                   | Clave secreta para firmar tokens JWT               | `temp_secret`              |
+| `COOKIE_KEY`                   | (Reservado) Clave para cookies                     | `temp_cookie`              |
+| `LOGIN_RATE_LIMIT_VENTANA_MS`  | Ventana de tiempo para el rate limit de login (ms) | `900000` (15 minutos)      |
+| `LOGIN_RATE_LIMIT_MAXIMO`      | Maximo de intentos de login en la ventana          | `5`                        |
+
+**Ejemplo de archivo `.env` (backend/.env):**
+
+```env
+HOST=localhost
+PORT=3000
+DB_PORT=5432
+DB_USERNAME=miusuario
+DB_PASSWORD=micontraseñaSegura123
+DATABASE=empresa_aseos
+JWT_SECRET=cambia_esto_por_un_valor_muy_largo_y_aleatorio_123456789
+LOGIN_RATE_LIMIT_VENTANA_MS=900000
+LOGIN_RATE_LIMIT_MAXIMO=5
+```
 
 # Pruebas
 ```bash
