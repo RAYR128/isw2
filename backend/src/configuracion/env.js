@@ -11,3 +11,5 @@ export const PASSWORD = process.env.DB_PASSWORD || "temp_password";
 export const DATABASE = process.env.DATABASE || "temp_db";
 export const JWT_SECRET = process.env.JWT_SECRET || "temp_secret";
 export const cookieKey = process.env.COOKIE_KEY || "temp_cookie";
+export const LOGIN_RATE_LIMIT_VENTANA_MS = parseInt(process.env.LOGIN_RATE_LIMIT_VENTANA_MS || String(15 * 60 * 1000), 10);
+export const LOGIN_RATE_LIMIT_MAXIMO = parseInt(process.env.LOGIN_RATE_LIMIT_MAXIMO || "5", 10);
