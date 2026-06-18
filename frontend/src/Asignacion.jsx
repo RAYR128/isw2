@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { crearAsignacion, verAsignaciones } from './api';
-import Header from "./GeneracionPagina";
+import { Layout } from "./GeneracionPagina";
 
 function Asignacion() {
 	const [formularioAsignacion, cambiarDatosAsignacion] = useState({
@@ -73,9 +73,7 @@ function Asignacion() {
 	};
 
 	return (
-		<div className="bg-gray-100">
-			<Header />
-			<main className="container mx-auto p-6">
+		<Layout>
 				<h2 className="text-2xl font-bold mb-6">Volumen de Personal a Enviar</h2>
 				<div className="bg-white p-6 rounded-lg shadow-md mb-6">
 					<h3 className="text-lg font-semibold mb-4">Evaluacion y Asignacion</h3>
@@ -205,8 +203,7 @@ function Asignacion() {
 						</table>
 					)}
 				</div>
-			</main>
-		</div>
+		</Layout>
 	);
 }
 

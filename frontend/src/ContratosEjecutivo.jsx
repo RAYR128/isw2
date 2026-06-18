@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { verContratosEjecutivo, crearContratoEjecutivo } from './api';
-import Header from "./GeneracionPagina";
+import { Layout } from "./GeneracionPagina";
 
 function ContratosEjecutivo() {
 	const [contratos, verContratosP] = useState([]);
@@ -88,12 +88,16 @@ function ContratosEjecutivo() {
 		}
 	};
 
-	if (cargando) { return (<div className="bg-gray-100 min-h-screen flex items-center justify-center"><div>Cargando...</div></div>); }
+	if (cargando) {
+		return (
+			<Layout>
+				<div className="flex items-center justify-center py-12">Cargando...</div>
+			</Layout>
+		);
+	}
 
 	return (
-		<div className="bg-gray-100">
-			<Header />
-			<main className="container mx-auto p-6">
+		<Layout>
 				<h2 className="text-2xl font-bold mb-6">Contratacion de Personal Ejecutivo</h2>
 				<div className="bg-white p-6 rounded-lg shadow-md mb-6">
 					<h3 className="text-lg font-semibold mb-4">Nueva Contratacion</h3>
@@ -276,8 +280,7 @@ function ContratosEjecutivo() {
 						</tbody>
 					</table>
 				</div>
-			</main>
-		</div>
+		</Layout>
 	);
 }
 

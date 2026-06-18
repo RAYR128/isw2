@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { verContratosPersonalIds, verContratoPersonal, crearContratoPersonal } from './api';
-import Header from "./GeneracionPagina";
+import { Layout } from "./GeneracionPagina";
 
 function ContratosPersonal() {
 	const [contratos, verContratosP] = useState([]);
@@ -80,12 +80,16 @@ function ContratosPersonal() {
 		}
 	};
 
-	if (cargando) { return (<div className="bg-gray-100 min-h-screen flex items-center justify-center"><div>Cargando...</div></div>); }
+	if (cargando) {
+		return (
+			<Layout>
+				<div className="flex items-center justify-center py-12">Cargando...</div>
+			</Layout>
+		);
+	}
 
 	return (
-		<div className="bg-gray-100">
-			<Header />
-			<main className="container mx-auto p-6">
+		<Layout>
 				<h2 className="text-2xl font-bold mb-6">Contratos de Trabajos de los Trabajadores</h2>
 				<div className="bg-white p-6 rounded-lg shadow-md mb-6">
 					<h3 className="text-lg font-semibold mb-4">Nuevo Contrato</h3>
@@ -216,8 +220,7 @@ function ContratosPersonal() {
 						</tbody>
 					</table>
 				</div>
-			</main>
-		</div>
+		</Layout>
 	);
 }
 

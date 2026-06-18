@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { verAsignacionDetalles, verAsignacionDistribucion, agregarPersonalAsignacion, removerPersonalAsignacion, verContratoPersonal, verContratosPersonalIds } from './api';
-import Header from "./GeneracionPagina";
+import { Layout } from "./GeneracionPagina";
 
 function DistribucionAsignacion() {
 	const { id } = useParams();
@@ -140,13 +140,23 @@ function DistribucionAsignacion() {
 		}
 	};
 
-	if (cargando) { return (<div className="bg-gray-100 min-h-screen flex items-center justify-center"><div>Cargando...</div></div>); }
-	if (error) { return (<div className="bg-gray-100 min-h-screen flex items-center justify-center"><div className="text-red-600">{error}</div></div>); }
+	if (cargando) {
+		return (
+			<Layout>
+				<div className="flex items-center justify-center py-12">Cargando...</div>
+			</Layout>
+		);
+	}
+	if (error) {
+		return (
+			<Layout>
+				<div className="flex items-center justify-center py-12 text-red-600">{error}</div>
+			</Layout>
+		);
+	}
 
 	return (
-		<div className="bg-gray-100">
-			<Header />
-			<main className="container mx-auto p-6">
+		<Layout>
 				<h2 className="text-2xl font-bold mb-6">
 					Distribucion de Personal segun Requerimientos para "{asignacion?.cliente || 'Cliente'}"
 				</h2>
@@ -290,8 +300,7 @@ function DistribucionAsignacion() {
 						</tbody>
 					</table>
 				</div>
-			</main>
-		</div>
+		</Layout>
 	);
 }
 
