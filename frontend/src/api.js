@@ -42,6 +42,7 @@ export const verAsignacionDetalles = (id) => requestAPIinterna(`/asignacion/${id
 export const verAsignacionDistribucion = (id) => requestAPIinterna(`/asignacion/${id}/distribucion`);
 export const agregarPersonalAsignacion = (id, data) => requestAPIinterna(`/asignacion/${id}/personal/agregar`, { method: 'POST', body: JSON.stringify(data), });
 export const removerPersonalAsignacion = (id, data) => requestAPIinterna(`/asignacion/${id}/personal/remover`, { method: 'POST', body: JSON.stringify(data), });
+export const verPersonalDetallesAsignacion = (id, idTrabajador) => requestAPIinterna(`/asignacion/${id}/personal/detalles?id_trabajador=${idTrabajador}`);
 
 // Contratos de personal
 export const verContratosPersonalIds = () => requestAPIinterna('/contratos/personal');

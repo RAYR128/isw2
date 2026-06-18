@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import { verAsignacionDetalles, verAsignacionDistribucion, agregarPersonalAsignacion, removerPersonalAsignacion, verContratoPersonal, verContratosPersonalIds } from './api';
+import { verAsignacionDetalles, verAsignacionDistribucion, agregarPersonalAsignacion, removerPersonalAsignacion, verPersonalDetallesAsignacion, verContratoPersonal, verContratosPersonalIds } from './api';
 import { Layout } from "./GeneracionPagina";
 
 function DistribucionAsignacion() {
@@ -11,6 +11,9 @@ function DistribucionAsignacion() {
 	const [error, mostrarError] = useState('');
 	const [workerNames, setWorkerNames] = useState({});
 	const [workers, setWorkers] = useState([]);
+	const [detallesModal, setDetallesModal] = useState(null);
+	const [cargandoDetalles, setCargandoDetalles] = useState(false);
+	const [errorDetalles, setErrorDetalles] = useState('');
 
 	// Formulario para añadir personal
 	const [formularioDistribucion, cambiarDatosDistribucion] = useState({
@@ -114,6 +117,28 @@ function DistribucionAsignacion() {
 		} catch (_) {
 			mostrarError('Error al asignar personal');
 		}
+	};
+
+	const handleVerDetalles = async (idTrabajador) => {
+		try {
+			setCargandoDetalles(true);
+			setErrorDetalles('');
+			const detalles = await verPersonalDetallesAsignacion(id, idTrabajador);
+			setDetallesModal({
+				idTrabajador,
+				nombre: workerNames[idTrabajador] || `Trabajador ${idTrabajador}`,
+				...detalles,
+			});
+		} catch (_) {
+			setErrorDetalles('Error al cargar los detalles del trabajador');
+		} finally {
+			setCargandoDetalles(false);
+		}
+	};
+
+	const cerrarDetallesModal = () => {
+		setDetallesModal(null);
+		setErrorDetalles('');
 	};
 
 	const handleRemover = async (idTrabajador) => {
@@ -261,6 +286,9 @@ function DistribucionAsignacion() {
 				</div>
 				<div className="bg-white p-6 rounded-lg shadow-md">
 					<h3 className="text-lg font-semibold mb-4">Distribuciones Actuales</h3>
+					{errorDetalles && (
+						<p className="text-red-600 text-sm mb-4">{errorDetalles}</p>
+					)}
 					<table className="w-full table-auto">
 						<thead>
 							<tr className="bg-gray-50">
@@ -281,7 +309,11 @@ function DistribucionAsignacion() {
 										>
 											Remover
 										</button>
-										<button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+										<button
+											onClick={() => handleVerDetalles(item.id_trabajador)}
+											disabled={cargandoDetalles}
+											className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
+										>
 											Ver mas detalles
 										</button>
 									</td>
@@ -300,6 +332,60 @@ function DistribucionAsignacion() {
 						</tbody>
 					</table>
 				</div>
+				{detallesModal && (
+					<div
+						className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4"
+						onClick={cerrarDetallesModal}
+					>
+						<div
+							className="bg-white rounded-lg shadow-xl max-w-lg w-full p-6"
+							onClick={(e) => e.stopPropagation()}
+						>
+							<div className="flex items-start justify-between mb-4">
+								<h3 className="text-lg font-semibold">
+									Detalles de {detallesModal.nombre}
+								</h3>
+								<button
+									onClick={cerrarDetallesModal}
+									className="text-gray-400 hover:text-gray-600 text-xl leading-none"
+									aria-label="Cerrar"
+								>
+									&times;
+								</button>
+							</div>
+							<div className="space-y-3 text-sm">
+								<div className="grid grid-cols-2 gap-2">
+									<span className="font-medium text-gray-600">Turno:</span>
+									<span>{detallesModal.turno}</span>
+									<span className="font-medium text-gray-600">Fecha de inicio:</span>
+									<span>{detallesModal.inicio}</span>
+									<span className="font-medium text-gray-600">Duracion:</span>
+									<span>{detallesModal.duracion} dias</span>
+									<span className="font-medium text-gray-600">Estado:</span>
+									<span>
+										<span className={`px-2 py-1 rounded ${getEstadoClass(detallesModal.estado)}`}>
+											{detallesModal.estado}
+										</span>
+									</span>
+								</div>
+								<div>
+									<p className="font-medium text-gray-600 mb-1">Tareas, detalles y notas especiales:</p>
+									<p className="text-gray-700 whitespace-pre-wrap bg-gray-50 rounded-md p-3 border border-gray-200 min-h-[4rem]">
+										{detallesModal.detalles || 'Sin detalles registrados.'}
+									</p>
+								</div>
+							</div>
+							<div className="mt-6 flex justify-end">
+								<button
+									onClick={cerrarDetallesModal}
+									className="bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2"
+								>
+									Cerrar
+								</button>
+							</div>
+						</div>
+					</div>
+				)}
 		</Layout>
 	);
 }
