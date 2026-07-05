@@ -48,7 +48,11 @@ export const verPersonalDetallesAsignacion = (id, idTrabajador) => requestAPIint
 export const verContratosPersonalIds = () => requestAPIinterna('/contratos/personal');
 export const verContratoPersonal = (id) => requestAPIinterna(`/contratos/personal/${id}`);
 export const crearContratoPersonal = (data) => requestAPIinterna('/contratos/personal', { method: 'POST', body: JSON.stringify(data), });
+export const eliminarContratoPersonal = (id) => requestAPIinterna(`/contratos/personal/${id}`, { method: 'DELETE' });
 
-// Executive Contracts
-export const verContratosEjecutivo = () => requestAPIinterna('/contratos/ejecutivo');
-export const crearContratoEjecutivo = (data) => requestAPIinterna('/contratos/ejecutivo', { method: 'POST', body: JSON.stringify(data), });
+// Contratos ejecutivos
+export const verContratosEjecutivo = () => requestAPIinterna('/contratos/ejecutivos');
+export const verContratoEjecutivo = (id) => requestAPIinterna(`/contratos/ejecutivos/${id}`);
+export const crearContratoEjecutivo = (data) => requestAPIinterna('/contratos/ejecutivos', { method: 'POST', body: JSON.stringify(data), });
+export const modificarContratoEjecutivo = (id, data) => requestAPIinterna(`/contratos/ejecutivos/${id}`, { method: 'POST', body: JSON.stringify(data), });
+export const eliminarContratoEjecutivo = (id) => requestAPIinterna(`/contratos/ejecutivos/${id}`, { method: 'DELETE' });

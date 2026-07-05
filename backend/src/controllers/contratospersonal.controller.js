@@ -1,4 +1,4 @@
-import { getContratoPersonalRepo } from "../database/database.js";
+import { getContratoPersonalRepo, getAsignacionPersonalRepo } from "../database/database.js";
 
 // Calcula estado del contrato
 function calcularEstadoContrato(contrato) {
@@ -89,4 +89,28 @@ export async function modificarContrato(req, res) {
 		...guardado,
 		duracion: `${guardado.duracion_anos} años`,
 	});
+}
+
+// DELETE /contratos/personal/:id -> eliminar
+export async function eliminarContrato(req, res) {
+	const id = parseInt(req.params.id);
+	const repo = getContratoPersonalRepo();
+
+	const contrato = await repo.findOne({ where: { id } });
+	if (!contrato) {
+		return res.status(404).json({ mensaje: "Contrato no encontrado" });
+	}
+
+	const asignacionRepo = getAsignacionPersonalRepo();
+	const asignaciones = await asignacionRepo.count({
+		where: { contrato_personal_id: id },
+	});
+	if (asignaciones > 0) {
+		return res.status(409).json({
+			mensaje: "No se puede eliminar: el trabajador esta asignado a una asignacion",
+		});
+	}
+
+	await repo.delete(id);
+	res.json({ mensaje: "Contrato eliminado exitosamente" });
 }

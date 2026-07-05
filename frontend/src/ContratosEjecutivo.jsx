@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { verContratosEjecutivo, crearContratoEjecutivo } from './api';
+import { Link } from 'react-router-dom';
+import { verContratosEjecutivo, crearContratoEjecutivo, eliminarContratoEjecutivo } from './api';
 import { Layout } from "./GeneracionPagina";
 
 function ContratosEjecutivo() {
@@ -71,6 +72,17 @@ function ContratosEjecutivo() {
 			verLosContratos();
 		} catch (_) {
 			mostrarError('Error al iniciar el proceso de contratacion');
+		}
+	};
+
+	const handleRemover = async (id) => {
+		if (window.confirm('¿Esta seguro de que desea remover este contrato ejecutivo?')) {
+			try {
+				await eliminarContratoEjecutivo(id);
+				verLosContratos();
+			} catch (error) {
+				mostrarError(error.mensaje || 'Error al remover el contrato ejecutivo');
+			}
 		}
 	};
 
@@ -252,7 +264,7 @@ function ContratosEjecutivo() {
 					<table className="w-full table-auto">
 						<thead>
 							<tr className="bg-gray-50">
-								<th className="px-4 py-2 text-left"></th>
+								<th className="px-4 py-2 text-left">Acciones</th>
 								<th className="px-4 py-2 text-left">Nombre</th>
 								<th className="px-4 py-2 text-left">Cargo</th>
 								<th className="px-4 py-2 text-left">Fecha de Contratacion</th>
@@ -262,9 +274,19 @@ function ContratosEjecutivo() {
 						<tbody>
 							{contratos.map((contrato) => (
 								<tr key={contrato.id}>
-									<td className="border px-4 py-2">
-										<button className="bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+									<td className="border px-4 py-2 space-x-2">
+										<Link
+											to={`/contratos/ejecutivos/${contrato.id}`}
+											className="inline-block bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+										>
 											Modificar
+										</Link>
+										<button
+											type="button"
+											onClick={() => handleRemover(contrato.id)}
+											className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+										>
+											Remover
 										</button>
 									</td>
 									<td className="border px-4 py-2">{contrato.nombre}</td>

@@ -6,6 +6,7 @@ import Asignacion from './Asignacion';
 import DistribucionAsignacion from './DistribucionAsignacion';
 import ContratosPersonal from './ContratosPersonal';
 import ContratosEjecutivo from './ContratosEjecutivo';
+import ContratosEjecutivoModificar from './ContratosEjecutivoModificar';
 
 function App() {
 	const [esAuthValido, cambiarEstadoAuth] = useState(false);
@@ -28,7 +29,8 @@ function App() {
 				<Route path="/asignacion" element={esAuthValido ? <Asignacion /> : <Navigate to="/" />}/>
 				<Route path="/asignacion/:id" element={esAuthValido ? <DistribucionAsignacion /> : <Navigate to="/" />}/>
 				<Route path="/contratos/personal" element={esAuthValido ? <ContratosPersonal /> : <Navigate to="/" />}/>
-				<Route path="/contratos/ejecutivo" element={esAuthValido ? <ContratosEjecutivo /> : <Navigate to="/" />}/>
+				<Route path="/contratos/ejecutivos" element={esAuthValido ? <ContratosEjecutivo /> : <Navigate to="/" />}/>
+				<Route path="/contratos/ejecutivos/:id" element={esAuthValido ? <ContratosEjecutivoModificar /> : <Navigate to="/" />}/>
 			</Routes>
 		</Router>
 	);

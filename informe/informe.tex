@@ -207,7 +207,7 @@ La Tabla~\ref{tab:rf} resume los requerimientos funcionales identificados.
   \small{RF2} & Evaluación de volumen de personal por cliente & Encargado de operaciones & \scriptsize\texttt{/asignacion} & \scriptsize\texttt{POST /api/crearAsignacion} \\
   \small{RF3} & Asignación de personal con turnos y tareas & Administrador de operaciones & \scriptsize\texttt{/asignacion/:id} & \scriptsize\texttt{POST /api/asignacion/:id/personal/agregar} \\
   \small{RF4} & Gestión de contratos de trabajadores & RRHH / Contador & \scriptsize\texttt{/contratos/personal} & \scriptsize\texttt{POST /api/contratos/personal} \\
-  \small{RF5} & Contratación de personal ejecutivo & Gerente / Director & \scriptsize\texttt{/contratos/ejecutivo} & \scriptsize\texttt{POST /api/contratos/ejecutivo} \\
+  \small{RF5} & Contratación de personal ejecutivo & Gerente / Director & \scriptsize\texttt{/contratos/ejecutivos} & \scriptsize\texttt{POST /api/contratos/ejecutivos} \\
   \small{RF6} & Visualización de dashboard de módulos & Usuario autenticado & \scriptsize\texttt{/dashboard} & --- \\
 
   \bottomrule
@@ -485,7 +485,7 @@ El flujo de navegación del sistema sigue la estructura definida en \texttt{App.
 
 \begin{center}
   \texttt{/} $\rightarrow$ Login $\rightarrow$ \texttt{/dashboard} $\rightarrow$ \texttt{/asignacion} $\rightarrow$ \texttt{/asignacion/:id}\\
-  \texttt{/dashboard} $\rightarrow$ \texttt{/contratos/personal} \quad | \quad \texttt{/contratos/ejecutivo}
+  \texttt{/dashboard} $\rightarrow$ \texttt{/contratos/personal} \quad | \quad \texttt{/contratos/ejecutivos}
 \end{center}
 
 El menú lateral (\texttt{GeneracionPagina.jsx}) permanece visible en todas las páginas autenticadas, con resaltado del módulo activo.
@@ -801,14 +801,14 @@ curl -X POST http://localhost:3000/api/contratos/personal \
   \textbf{Metodo} & \textbf{Ruta} & \textbf{Descripcion} \\
   \midrule
   \endfirsthead
-  GET & \scriptsize\texttt{/api/contratos/ejecutivo} & Lista todos los registros ejecutivos. \\
-  POST & \scriptsize\texttt{/api/contratos/ejecutivo} & Inicia proceso de contratación. \\
+  GET & \scriptsize\texttt{/api/contratos/ejecutivos} & Lista todos los registros ejecutivos. \\
+  POST & \scriptsize\texttt{/api/contratos/ejecutivos} & Inicia proceso de contratación. \\
   \bottomrule
 \end{longtable}
 
 \textbf{Ejemplo -- crear registro ejecutivo:}
 \begin{lstlisting}[language=bash]
-curl -X POST http://localhost:3000/api/contratos/ejecutivo \
+curl -X POST http://localhost:3000/api/contratos/ejecutivos \
   -H "Content-Type: application/json" \
   -d '{
     "nombre": "Laura Fernandez",

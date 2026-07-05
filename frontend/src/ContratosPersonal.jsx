@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { verContratosPersonalIds, verContratoPersonal, crearContratoPersonal } from './api';
+import { verContratosPersonalIds, verContratoPersonal, crearContratoPersonal, eliminarContratoPersonal } from './api';
 import { Layout } from "./GeneracionPagina";
 
 function ContratosPersonal() {
@@ -21,7 +21,10 @@ function ContratosPersonal() {
 			estadoCarga(true);
 			const ids = await verContratosPersonalIds();
 			const contratosData = await Promise.all(
-				ids.map(contrato => verContratoPersonal(contrato.id))
+				ids.map(async (contrato) => ({
+					id: contrato.id,
+					...(await verContratoPersonal(contrato.id)),
+				}))
 			);
 			verContratosP(contratosData);
 		} catch (_) {
@@ -64,6 +67,17 @@ function ContratosPersonal() {
 			verLosContratos();
 		} catch (_) {
 			mostrarError('Error al crear el contrato');
+		}
+	};
+
+	const handleRemover = async (id) => {
+		if (window.confirm('¿Esta seguro de que desea remover este contrato?')) {
+			try {
+				await eliminarContratoPersonal(id);
+				verLosContratos();
+			} catch (error) {
+				mostrarError(error.mensaje || 'Error al remover el contrato');
+			}
 		}
 	};
 
@@ -201,6 +215,7 @@ function ContratosPersonal() {
 								<th className="px-4 py-2 text-left">Duracion</th>
 								<th className="px-4 py-2 text-left">Salario & IPC</th>
 								<th className="px-4 py-2 text-left">Estado</th>
+								<th className="px-4 py-2 text-left">Acciones</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -214,6 +229,15 @@ function ContratosPersonal() {
 										<span className={`px-2 py-1 rounded ${getEstadoClass(contrato.estado)}`}>
 											{contrato.estado}
 										</span>
+									</td>
+									<td className="border px-4 py-2">
+										<button
+											type="button"
+											onClick={() => handleRemover(contrato.id)}
+											className="bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2"
+										>
+											Remover
+										</button>
 									</td>
 								</tr>
 							))}

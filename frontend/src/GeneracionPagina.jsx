@@ -5,7 +5,7 @@ const navItems = [
 	{ to: "/dashboard", label: "Dashboard", description: "Panel principal" },
 	{ to: "/asignacion", label: "Volumen de Personal", description: "Asignacion de personal", matchPrefix: "/asignacion" },
 	{ to: "/contratos/personal", label: "Contratos de Trabajo", description: "Contratos de trabajadores" },
-	{ to: "/contratos/ejecutivo", label: "Contratos Ejecutivos", description: "Personal ejecutivo" },
+	{ to: "/contratos/ejecutivos", label: "Contratos Ejecutivos", description: "Personal ejecutivo" },
 ];
 
 const cerrarSesion = () => {

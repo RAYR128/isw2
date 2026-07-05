@@ -4,6 +4,7 @@ import {
 	obtenerContrato,
 	crearContrato,
 	modificarContrato,
+	eliminarContrato,
 } from "../controllers/contratospersonal.controller.js";
 
 const router = express.Router();
@@ -13,5 +14,6 @@ router.get("/contratos/personal", listarContratos);
 router.get("/contratos/personal/:id", obtenerContrato);
 router.post("/contratos/personal", crearContrato);
 router.post("/contratos/personal/:id", modificarContrato);
+router.delete("/contratos/personal/:id", eliminarContrato);
 
 export default router;

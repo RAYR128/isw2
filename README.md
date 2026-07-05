@@ -94,14 +94,19 @@ Trabajo en progreso, no completos aun, esto es una especificacion hasta ahora.
 * [X] GET /contratos/personal/{id} - Retorna arreglo con nombre de trabajador, inicio, duracion, salario / IPC, y un estado
 * [X] POST /contratos/personal - Crear un contrato, espera nombre del trabajador, fecha de inicio, duracion, tipo, salario, IPC
 * [X] POST /contratos/personal/{id} - Modificar contrato existente
+* [X] DELETE /contratos/personal/{id} - Eliminar contrato; retorna 409 si el trabajador esta asignado a una asignacion
 
-### Contratos - Ejecutivo/Administracion
-* [X] GET /contratos/ejecutivo
-* [X] POST /contratos/ejecutivo
+### Contratos - Ejecutivos/Administracion
+* [X] GET /contratos/ejecutivos - Lista todos los registros ejecutivos
+* [X] POST /contratos/ejecutivos - Crear un nuevo proceso de contratacion
+* [X] GET /contratos/ejecutivos/{id} - Detalle completo de un contrato ejecutivo
+* [X] POST /contratos/ejecutivos/{id} - Modificar contrato existente (campos permitidos: salario, especializacion, fecha_entrevista, fecha_contratacion, prioridad, comentarios)
+* [X] DELETE /contratos/ejecutivos/{id} - Eliminar contrato ejecutivo
 
 ## Frontend
 * [X] / - pagina de dashboard.html o login.html
 * [X] /asignacion - asignacion.html - pagina de asignacion
 * [X] /asignacion/{id} - distribucionasignacion.html pagina de distribucion de personal para una asignacion
-* [X] /contratos/personal - contratospersonal.html pagina de contrato personal
-* [ ] /contratos/ejecutivo - contratosejecutivo.html pagina de contrato ejecutivo
+* [X] /contratos/personal - contratospersonal.html pagina de contrato personal (incluye boton Remover)
+* [X] /contratos/ejecutivos - contratosejecutivo.html pagina de contrato ejecutivo
+* [X] /contratos/ejecutivos/{id} - pagina de modificacion de contrato ejecutivo
