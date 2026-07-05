@@ -1,0 +1,828 @@
+\documentclass[12pt,a4paper]{report}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage{geometry}
+\geometry{margin=2.5cm}
+\usepackage{graphicx}
+\usepackage{grffile}
+\usepackage{hyperref}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{array}
+\usepackage{multirow}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{tikz}
+\usepackage{fontspec}
+\setmainfont{Arial}
+\usetikzlibrary{positioning,arrows.meta,shapes.geometric,fit}
+\usepackage{titlesec}
+\titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+\titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue, citecolor=black}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\leftmark}
+\fancyhead[R]{\thepage}
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+
+\renewcommand{\thechapter}{\Roman{chapter}}
+\renewcommand{\thesection}{\thechapter.\arabic{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!10},
+  keywordstyle=\color{blue},
+  commentstyle=\color{gray},
+  stringstyle=\color{teal},
+  extendedchars=true,
+  inputencoding=utf8,
+  literate=
+    {á}{{\'a}}1 {é}{{\'e}}1 {í}{{\'i}}1 {ó}{{\'o}}1 {ú}{{\'u}}1
+    {ñ}{{\~n}}1 {Á}{{\'A}}1 {É}{{\'E}}1 {Í}{{\'I}}1 {Ó}{{\'O}}1
+    {Ú}{{\'U}}1 {Ñ}{{\~N}}1,
+}
+
+\graphicspath{{imagenes/}}
+
+\newcommand{\screenshot}[2]{%
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.92\textwidth]{#1}
+    \caption{#2}
+  \end{figure}%
+}
+
+\newcommand{\screenshotsmall}[2]{%
+  \begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{#1}
+    \caption{#2}
+  \end{figure}%
+}
+
+\begin{document}
+
+% --- PORTADA ---
+\begin{titlepage}
+  \centering
+  \vspace*{2cm}
+  {\Large UNIVERSIDAD DEL BÍO-BÍO\par}
+  \vspace{0.5cm}
+  {\large Ingeniería de Software\par}
+  \vspace{3cm}
+  {\huge\bfseries Sistema de Gestión para Empresa de Aseos\par}
+  \vspace{0.5cm}
+  {\Large Región del Bío-Bío\par}
+  \vspace{2cm}
+  {\large Proyecto de Ingeniería de Software\par}
+  \vspace{3cm}
+\begin{center}
+\begin{tabular}{r l}
+  Alumno: & \textbf{Ricardo Alejandro Yáñez Ríos} \\
+  
+  Profesora: & \textbf{Alejandra Segura}
+\end{tabular}
+\end{center}
+  \vfill
+  {\large Julio 2026\par}
+  Concepción -- Chile
+\end{titlepage}
+
+\pagenumbering{roman}
+\tableofcontents
+\listoffigures
+\listoftables
+\clearpage
+\pagenumbering{arabic}
+
+% =============================================================================
+\clearpage
+\chapter{Introducción}
+% =============================================================================
+
+El objetivo de este trabajo es desarrollar y documentar, el proyecto \textit{Sistema de Gestión para Empresa de Aseos}, desarrollado como parte del curso de Ingeniería de Software (ISW) buscando enfrentar estas tecnologías a los retos para una transformación digital. Este trabajo en si, busca apoyar la gestión operativa y contractual de una empresa de servicios de aseo ubicada en Concepción, cuyos clientes se concentran en la Región del Bío-Bío.
+
+En el documento se presenta el contexto organizacional, la definición del software propuesto, el análisis y diseño de la solución, la implementación técnica realizada en el repositorio, y las conclusiones del trabajo. El desarrollo combina un backend en Node.js con Express y PostgreSQL, y un frontend en React con Vite, comunicados mediante una API REST.
+
+\section{Presentación del contexto o área de su problemática}
+
+\subsection{Presentación Rubro Institución/Empresa}
+
+La empresa objeto de estudio pertenece al rubro de servicios de aseo y limpieza profesional. Opera exclusivamente en la Región del Bío-Bío, con oficina central en Concepción. Su cartera de clientes incluye instituciones públicas y privadas como por ejemplo; Hospitales, Bancos, Universidades y otras entidades que contratan servicios a través del mercado público o mediante comunicación directa.
+
+El modelo de negocio consiste en proveer personal de aseo junto con herramientas básicas de limpieza. La cantidad de trabajadores y el tipo de implementación varían según el cliente: un Hospital requiere mayor volumen de personal y equipamiento especializado (trajes de bioseguridad, desinfectantes hospitalarios) que una sucursal bancaria, donde basta con aspiradoras y productos químicos estándar.
+
+La empresa mantiene relaciones de largo plazo con clientes frecuentes, aunque no exclusivos. Los contratos tienen duraciones entre 1 y 5 años, con posibilidad de incorporar personal adicional capacitado en aseo cuando surgen nuevas necesidades por ejemplo; un nuevo edificio universitario o redistribuir el personal existente en cambios menores.
+
+El personal fijo incluye: un administrador de empresas, un contador auditor, un químico, un prevencionista de riesgos, un encargado de RRHH, un encargado de ventas y personal capacitado en aseo. La administración de la empresa se encarga directamente de la organización de turnos y de la asignación de personal a cada ubicación de servicio.
+
+\subsection{Descripción de problemas u oportunidades de mejora}
+
+El levantamiento de información reveló las siguientes problemáticas y oportunidades de mejora:
+
+\begin{itemize}
+  \item \textbf{Gestión manual de asignaciones:} La determinación del volumen de personal y su distribución por ubicación se realiza de forma informal, dificultando el seguimiento cuando hay múltiples clientes activos.
+  \item \textbf{Variabilidad por tipo de cliente:} Cada institución exige una valoración distinta o cálculos en los costos diferente por los trabajos realizados, herramientas y cantidad de personal distintos, lo que complica la planificación sin un registro centralizado.
+  \item \textbf{Contratos de largo plazo:} Los acuerdos de 1 a 5 años requieren control de vigencia, ajustes por IPC y renovaciones, tareas actualmente dispersas en planillas.
+  \item \textbf{Redistribución ante cambios:} Las negociaciones contractuales pueden implicar incorporar o reasignar personal, al no poseer un sistema de software, estos cambios no quedan trazados.
+  \item \textbf{Contratación ejecutiva:} Posiciones críticas (administrador, contador, prevencionista, quimico, ventas u otros) necesitan un proceso de seguimiento que hoy no está sistematizado.
+  \item \textbf{Presupuesto y negociación:} Cualquier desviación presupuestaria debe negociarse con el cliente; un sistema que registre asignaciones y contratos facilita esa gestión.
+\end{itemize}
+
+\section{Propuesta de solución}
+
+Como respuesta a lo anterior, se propone un \textbf{sitio web de gestión} que centralice las operaciones claves de la empresa. Las funciones principales son:
+
+\begin{enumerate}
+  \item Asignar lugares y volumen de personal, a enviar, según tipo de cliente y necesidades.
+  \item Asignar personal individualmente a cada ubicación, con instrucciones, herramientas y horarios específicos.
+  \item Administrar contratos de personal de aseo, incluyendo salarios y ajustes del IPC.
+  \item Administrar contratos y procesos de contratación de personal ejecutivo.
+\end{enumerate}
+
+En este trabajo de ingeniería de software, la solución que se se implementaría es una aplicación web con arquitectura cliente-servidor: un frontend React accesible desde navegador y un backend Express que persiste la información en PostgreSQL.
+
+\section{Composición del Informe}
+
+Este trabajo se organiza de la siguiente manera:
+
+\begin{itemize}
+  \item \textbf{Capítulo II} define los objetivos, requerimientos funcionales y no funcionales, límites e interfaces del software.
+  \item \textbf{Capítulo III} presenta el análisis y diseño: modelo de datos, actores, casos de uso e interfaz de usuario.
+  \item \textbf{Capítulo IV} describe la arquitectura y estructura del código desarrollado.
+  \item \textbf{Capítulo V} expone las conclusiones del proyecto.
+  \item \textbf{Capítulo VI} lista la bibliografía consultada.
+  \item \textbf{Anexos} incluyen el instrumento de levantamiento y la documentación de pruebas de la API.
+\end{itemize}
+
+\screenshotsmall{dibujo.jpeg}{Ilustración contexto del trabajo de aseo}
+
+% =============================================================================
+\clearpage
+\chapter{Definición de Software}
+% =============================================================================
+
+\section{Objetivo General del Software propuesto}
+
+Desarrollar un sistema web, que centralice la gestión operativa y contractual de la empresa de aseos, permitiendo evaluar el volumen de personal requerido, asignar trabajadores a clientes con turnos y herramientas específicas, ademas administrar contratos de personal administrativo, ejecutivo y operativo.
+
+\section{Objetivos Específicos del Software propuesto}
+
+\begin{enumerate}
+  \item Implementar un módulo de autenticación que restrinja el acceso a usuarios registrados.
+  \item Permitir la evaluación y registro del volumen de personal recomendado por cliente y ubicación.
+  \item Facilitar la asignación y distribución de personal con turnos, fechas de inicio y tareas detalladas.
+  \item Gestionar contratos de trabajadores de aseo con duración, salario y ajuste IPC.
+  \item Registrar procesos de contratación de personal ejecutivo (administrador, contador auditor, prevencionista de riesgo, químico, ventas).
+  \item Ofrecer un dashboard de navegación hacia los módulos principales del sistema.
+\end{enumerate}
+
+\pagebreak
+\section{Requerimientos Funcionales del Sw}
+
+La Tabla~\ref{tab:rf} resume los requerimientos funcionales identificados.
+
+\begin{longtable}{@{}p{0.9cm}p{3.9cm}p{2.3cm}p{2.8cm}p{3.8cm}@{}}
+  \caption{Requerimientos funcionales del sistema} \label{tab:rf} \\
+  \toprule
+  \textbf{ID} & \textbf{Descripción} & \textbf{Actor} & \textbf{Ruta UI} & \textbf{Endpoint API} \\
+  \midrule
+  \endfirsthead
+  \toprule
+  \textbf{ID} & \textbf{Descripción} & \textbf{Actor} & \textbf{Ruta UI} & \textbf{Endpoint API} \\
+  \midrule
+  \endhead
+
+  \small{RF1} & Autenticación de usuario mediante credenciales & Usuario administrativo & \scriptsize\texttt{/} & \scriptsize\texttt{POST /api/login} \\
+  \small{RF2} & Evaluación de volumen de personal por cliente & Encargado de operaciones & \scriptsize\texttt{/asignacion} & \scriptsize\texttt{POST /api/crearAsignacion} \\
+  \small{RF3} & Asignación de personal con turnos y tareas & Administrador de operaciones & \scriptsize\texttt{/asignacion/:id} & \scriptsize\texttt{POST /api/asignacion/:id/personal/agregar} \\
+  \small{RF4} & Gestión de contratos de trabajadores & RRHH / Contador & \scriptsize\texttt{/contratos/personal} & \scriptsize\texttt{POST /api/contratos/personal} \\
+  \small{RF5} & Contratación de personal ejecutivo & Gerente / Director & \scriptsize\texttt{/contratos/ejecutivo} & \scriptsize\texttt{POST /api/contratos/ejecutivo} \\
+  \small{RF6} & Visualización de dashboard de módulos & Usuario autenticado & \scriptsize\texttt{/dashboard} & --- \\
+
+  \bottomrule
+\end{longtable}
+\section{Límites}
+
+El software propuesto contempla los siguientes límites de alcance:
+
+\begin{itemize}
+  \item Cobertura geográfica limitada a la Región del Bío-Bío; no incluye gestión de sucursales.
+  \item No integra el portal de Mercado Público ni sistemas contables externos.
+  \item No procesa pagos ni nómina; solo registra datos contractuales (salario, IPC).
+  \item No envía notificaciones a trabajadores ni clientes.
+  \item La edición de contratos ejecutivos en la interfaz es parcial (botón ``Modificar'' sin integración API).
+  \item La validación del token JWT se realiza solo en el frontend; el backend no verifica el token en rutas protegidas.
+\end{itemize}
+
+\section{Requerimientos No Funcionales del Sw}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Requerimientos no funcionales del sistema}
+  \label{tab:rnf}
+  \begin{tabular}{@{}p{2.5cm}p{10cm}@{}}
+    \toprule
+    \textbf{Categoría} & \textbf{Descripción} \\
+    \midrule
+    Seguridad & Contraseñas almacenadas con bcrypt; emisión de JWT en login; rate limit de 5 intentos fallidos cada 15 minutos en \texttt{/login}. \\
+    Rendimiento & Respuestas JSON livianas; consultas directas a PostgreSQL sin capas intermedias innecesarias. \\
+    Usabilidad & Interfaz en español, navegación lateral persistente, formularios con validación básica en cliente. \\
+    Mantenibilidad & Separación en rutas, controladores y esquemas TypeORM; monorepo con \texttt{backend/} y \texttt{frontend/} independientes. \\
+    Compatibilidad & Node.js $\geq$ 20, PostgreSQL $\geq$ 13, navegadores modernos con soporte ES6+. \\
+    Disponibilidad & CI en GitHub Actions con verificación de sintaxis, build frontend y smoke test del backend. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Interfaces externas de entrada}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Interfaces externas de entrada}
+  \label{tab:entrada}
+  \begin{tabular}{@{}p{3.5cm}p{9cm}@{}}
+    \toprule
+    \textbf{Interfaz} & \textbf{Descripción} \\
+    \midrule
+    Formulario de login & Usuario y contraseña enviados como JSON a \texttt{POST /api/login}. \\
+    Formulario de asignación & Cliente, ubicación, necesidad y cantidad de personal recomendado. \\
+    Formulario de distribución & ID de trabajador, turno, fecha de inicio, duración y detalles de tareas. \\
+    Formulario de contratos personal & Nombre, fecha inicio, duración en años, salario e IPC. \\
+    Formulario de contratos ejecutivo & Nombre, cargo, experiencia, salario, especialización, fecha entrevista, prioridad. \\
+    Variables de entorno & \texttt{HOST}, \texttt{PORT}, \texttt{DATABASE}, \texttt{JWT\_SECRET}, credenciales DB. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Interfaces externas de Salida}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Interfaces externas de salida}
+  \label{tab:salida}
+  \begin{tabular}{@{}p{3.5cm}p{9cm}@{}}
+    \toprule
+    \textbf{Interfaz} & \textbf{Descripción} \\
+    \midrule
+    Respuestas JSON & Datos de asignaciones, contratos, distribución y autenticación en formato JSON. \\
+    Vistas React & Páginas renderizadas: login, dashboard, asignación, distribución, contratos. \\
+    Estados calculados & \texttt{Activo}, \texttt{Pendiente}, \texttt{Inactivo} (distribución); \texttt{Vencido}, \texttt{Próximo a vencer} (contratos). \\
+    Herramientas sugeridas & Listado dinámico según ubicación (hospital $\rightarrow$ bioseguridad; otros $\rightarrow$ equipos estándar). \\
+    Token JWT & Cadena firmada con vigencia de 8 horas, almacenada en \texttt{localStorage}. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+% =============================================================================
+\clearpage
+\chapter{Análisis y Diseño}
+% =============================================================================
+
+\section{Modelo de datos}
+
+El sistema utiliza PostgreSQL como motor de base de datos, gestionado mediante TypeORM con esquemas \texttt{EntitySchema}. La Figura~\ref{fig:er} presenta el modelo entidad-relación lógico.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    entity/.style={draw, rectangle, minimum width=4.5cm, minimum height=1.5cm, 
+                   align=center, font=\small, inner sep=5pt},
+    rel/.style={-{Stealth}, thick}
+  ]
+    \node[entity] (usuarios) {usuarios\\\scriptsize id, username, password,\\nombre, rol, email};
+
+    % asignaciones
+    \node[entity, below left=2.5cm and 1.5cm of usuarios] (asignaciones) 
+      {asignaciones\\\scriptsize id, cliente, ubicacion,\\necesidad, personal\_recomendado, estado};
+
+    % contratos_p
+    \node[entity, below=5.2cm of usuarios] (contratos_p) 
+      {contratos\_personal\\\scriptsize id, nombre, inicio,\\duracion\_anos, salario, ipc};
+
+    % asig_pers
+    \node[entity, right=5.2cm of asignaciones] (asig_pers) 
+      {asignaciones\_personal\\\scriptsize id, asignacion\_id,\\contrato\_personal\_id, turno,\\inicio, duracion, detalles};
+
+    % contratos_e
+    \node[entity, below=2.8cm of contratos_p] (contratos_e) 
+      {contratos\_ejecutivo\\\scriptsize id, nombre, cargo, experiencia,\\salario, especializacion, estado};
+
+    \draw[rel] (asignaciones) -- node[above, font=\scriptsize]{1:N} (asig_pers);
+    \draw[rel] (contratos_p) -- node[above, font=\scriptsize]{1:N} (asig_pers);
+  \end{tikzpicture}
+  \caption{Modelo entidad-relación del sistema de gestión}
+  \label{fig:er}
+\end{figure}
+
+Las relaciones entre \texttt{asignaciones\_personal} y las tablas padre son lógicas (sin claves foráneas declaradas en TypeORM). El campo \texttt{contrato\_personal\_id} vincula cada distribución con un trabajador contratado.
+
+\section{Actores Casos de uso}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Actores del sistema}
+  \label{tab:actores}
+  \begin{tabular}{@{}p{4cm}p{9cm}@{}}
+    \toprule
+    \textbf{Actor} & \textbf{Descripción} \\
+    \midrule
+    Usuario administrativo & Personal de oficina con acceso al sistema; inicia sesión y navega los módulos. \\
+    Encargado de operaciones & Evalúa volumen de personal y crea asignaciones por cliente. \\
+    Administrador RRHH & Gestiona contratos de trabajadores de aseo y sus condiciones. \\
+    Gerente / Director & Inicia procesos de contratación de personal ejecutivo. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Lista de casos de uso}
+  \label{tab:cu}
+  \begin{tabular}{@{}clp{8cm}@{}}
+    \toprule
+    \textbf{ID} & \textbf{Nombre} & \textbf{Descripción breve} \\
+    \midrule
+    CU1 & Iniciar sesión & Validar credenciales y obtener token JWT. \\
+    CU2 & Evaluar volumen de personal & Registrar cliente, ubicación y cantidad recomendada. \\
+    CU3 & Distribuir personal & Asignar trabajadores con turno, inicio y tareas. \\
+    CU4 & Remover personal de asignación & Quitar un trabajador de la distribución activa. \\
+    CU5 & Gestionar contratos personal & Crear y consultar contratos de trabajadores. \\
+    CU6 & Iniciar contratación ejecutiva & Registrar candidato y proceso de entrevista. \\
+    CU7 & Ver dashboard & Acceder al panel de módulos principales. \\
+    CU8 & Cerrar sesión & Eliminar token y volver al login. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\pagebreak
+\section{Diagrama de casos de uso}
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    actor/.style={draw, shape=rectangle, rounded corners, minimum height=0.9cm, font=\small},
+    usecase/.style={draw, ellipse, minimum width=2.8cm, minimum height=0.8cm, align=center, font=\scriptsize},
+    line/.style={-}
+  ]
+    \node[actor] (admin) at (-5, 3) {Usuario admin.};
+    \node[actor] (ops) at (-5, 0) {Encargado ops.};
+    \node[actor] (rrhh) at (-5, -3) {Admin. RRHH};
+
+    \node[usecase] (cu1) at (0, 4) {CU1: Login};
+    \node[usecase] (cu7) at (0, 2.5) {CU7: Dashboard};
+    \node[usecase] (cu8) at (0, 1) {CU8: Cerrar sesión};
+    \node[usecase] (cu2) at (0, -0.5) {CU2: Evaluar volumen};
+    \node[usecase] (cu3) at (0, -2) {CU3: Distribuir personal};
+    \node[usecase] (cu4) at (-5, -2) {CU4: Remover personal};
+    \node[usecase] (cu5) at (5.5, -2.5) {CU5: Contratos personal};
+    \node[usecase] (cu6) at (5.5, -3.5) {CU6: Contratación ejecutiva};
+
+    \foreach \a/\cus in {admin/{cu1,cu7,cu8}, ops/{cu2,cu3,cu4}, rrhh/{cu5,cu6}} {
+      \foreach \cu in \cus {
+        \draw[line] (\a) -- (\cu);
+      }
+    }
+  \end{tikzpicture}
+  \caption{Diagrama general de casos de uso}
+  \label{fig:cu}
+\end{figure}
+
+\pagebreak
+\section{Especificación de los Casos de Uso}
+
+\subsection{CU1 -- Iniciar sesión}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Especificación CU1: Iniciar sesión}
+  \begin{tabular}{@{}p{3.5cm}p{10cm}@{}}
+    \toprule
+    \textbf{Campo} & \textbf{Descripción} \\
+    \midrule
+    ¿Quién? & Usuario del sistema (personal administrativo o ejecutivo). \\
+    ¿Qué? & Iniciar sesión en el sistema de gestión. \\
+    ¿Cuándo? & Al acceder al sistema desde la página principal (\texttt{/}). \\
+    ¿Cómo? & Ingresar credenciales válidas en el formulario de login. \\
+    Restricción & Solo usuarios registrados; máximo 5 intentos fallidos por ventana de 15 minutos. \\
+    Postcondición & Usuario autenticado accede al dashboard con token JWT almacenado. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{CU2 -- Evaluar volumen de personal}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Especificación CU2: Evaluar volumen de personal}
+  \begin{tabular}{@{}p{3.5cm}p{10cm}@{}}
+    \toprule
+    \textbf{Campo} & \textbf{Descripción} \\
+    \midrule
+    ¿Quién? & Administrador o encargado de operaciones. \\
+    ¿Qué? & Evaluar y registrar el volumen de personal necesario para un cliente. \\
+    ¿Cuándo? & Al recibir una nueva solicitud de servicio o cambio en necesidades. \\
+    ¿Cómo? & Seleccionar tipo de cliente, ubicación, describir necesidad y cantidad recomendada. \\
+    Restricción & La evaluación debe considerar el tipo de cliente (hospital requiere más personal que banco). \\
+    Postcondición & Evaluación guardada y disponible para asignación de personal. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\pagebreak
+\subsection{CU3 -- Distribuir personal}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Especificación CU3: Asignar personal a cliente}
+  \begin{tabular}{@{}p{3.5cm}p{10cm}@{}}
+    \toprule
+    \textbf{Campo} & \textbf{Descripción} \\
+    \midrule
+    ¿Quién? & Administrador de operaciones. \\
+    ¿Qué? & Asignar personal específico con equipamiento y turnos. \\
+    ¿Cuándo? & Después de la evaluación de volumen o ante cambios en distribución. \\
+    ¿Cómo? & Seleccionar trabajador, turno, fecha de inicio, duración y tareas específicas. \\
+    Restricción & Solo trabajadores con contrato activo; equipamiento según tipo de ubicación. \\
+    Postcondición & Asignación registrada en \texttt{asignaciones\_personal}. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{CU5 -- Gestionar contratos de personal}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Especificación CU5: Gestión de contratos de trabajo}
+  \begin{tabular}{@{}p{3.5cm}p{10cm}@{}}
+    \toprule
+    \textbf{Campo} & \textbf{Descripción} \\
+    \midrule
+    ¿Quién? & Administrador de RRHH o contador. \\
+    ¿Qué? & Crear y consultar contratos de trabajo para trabajadores. \\
+    ¿Cuándo? & Al contratar nuevo personal o renovar contratos existentes. \\
+    ¿Cómo? & Ingresar nombre, fecha de inicio, duración (1--5 años), salario e IPC. \\
+    Restricción & Contratos largos deben incluir ajuste IPC; duración máxima 5 años. \\
+    Postcondición & Contrato creado y almacenado en base de datos. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\pagebreak
+\section{Diseño interfaz y navegación}
+
+El flujo de navegación del sistema sigue la estructura definida en \texttt{App.jsx}:
+
+\begin{center}
+  \texttt{/} $\rightarrow$ Login $\rightarrow$ \texttt{/dashboard} $\rightarrow$ \texttt{/asignacion} $\rightarrow$ \texttt{/asignacion/:id}\\
+  \texttt{/dashboard} $\rightarrow$ \texttt{/contratos/personal} \quad | \quad \texttt{/contratos/ejecutivo}
+\end{center}
+
+El menú lateral (\texttt{GeneracionPagina.jsx}) permanece visible en todas las páginas autenticadas, con resaltado del módulo activo.
+
+\subsection{Guías de estilos}
+
+La interfaz adopta un patrón de \textbf{panel de administración} con tres zonas: cabecera superior fija, barra lateral de navegación y área de contenido principal. Los formularios utilizan etiquetas sobre campos de entrada, botones de acción primaria en color sólido y tablas para listados de datos. El diseño es responsivo mediante clases de Tailwind CSS (\texttt{md:}, \texttt{flex-col}).
+
+\subsection{Guía de colores}
+
+\begin{table}[htbp]
+  \centering
+  \caption{Paleta de colores de la interfaz}
+  \begin{tabular}{@{}p{3cm}p{3cm}p{7cm}@{}}
+    \toprule
+    \textbf{Elemento} & \textbf{Clase Tailwind} & \textbf{Uso} \\
+    \midrule
+    Primario & \texttt{bg-blue-600} & Cabecera, botones principales, ítem activo del menú. \\
+    Fondo & \texttt{bg-gray-100} & Fondo general de las páginas. \\
+    Tarjetas & \texttt{bg-white} & Contenedores de formularios y módulos del dashboard. \\
+    Texto secundario & \texttt{text-gray-500} & Descripciones y etiquetas de navegación. \\
+    Estados activos & \texttt{bg-green-100}, \texttt{bg-yellow-100} & Badges de estado en tablas de contratos y distribución. \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\subsection{Tipografía}
+
+Se utiliza la fuente sans-serif por defecto del sistema operativo, aplicada mediante Tailwind CSS. Los títulos de página emplean \texttt{text-xl font-bold}; las etiquetas de formulario usan \texttt{text-sm font-medium}; la navegación lateral muestra el nombre del módulo en \texttt{font-medium} y una descripción en \texttt{text-xs}.
+
+\subsection{Composición de las interfaces}
+
+\screenshot{Screenshot from 2026-07-02 22-08-48.png}{Interfaz de inicio de sesión del sistema}
+
+\screenshot{Screenshot from 2026-07-02 22-09-18.png}{Dashboard de gestión con acceso a los módulos principales}
+
+\screenshot{Screenshot from 2026-07-02 22-09-00.png}{Página de evaluación de volumen de personal y listado de asignaciones}
+
+\screenshot{Screenshot from 2026-07-02 22-09-03.png}{Página de distribución de personal para una asignación específica}
+
+\screenshot{Screenshot from 2026-07-02 22-09-05.png}{Gestión de contratos de trabajadores de aseo}
+
+\screenshot{Screenshot from 2026-07-02 22-09-07.png}{Módulo de contratación de personal ejecutivo}
+
+\screenshot{Screenshot from 2026-07-02 22-08-53.png}{Vista complementaria del módulo de asignaciones}
+
+\screenshot{Screenshot from 2026-07-02 22-08-57.png}{Vista complementaria de la distribución de personal}
+
+% =============================================================================
+\clearpage
+\chapter{Desarrollo}
+% =============================================================================
+
+\section{Diseño de arquitectura}
+
+La aplicación sigue una arquitectura de tres capas desacopladas. La Figura~\ref{fig:arquitectura} ilustra el flujo de comunicación entre componentes.
+
+\begin{figure}[htbp]
+  \centering
+  \begin{tikzpicture}[
+    box/.style={draw, rectangle, rounded corners, minimum width=2.8cm, minimum height=1cm, align=center, font=\small},
+    db/.style={draw, cylinder, shape border rotate=90, aspect=0.25, minimum height=1.2cm, minimum width=1.5cm, align=center, font=\small},
+    arr/.style={-{Stealth}, thick}
+  ]
+    \node[box, fill=blue!10] (fe) at (0, 0) {Frontend\\React + Vite\\:5173};
+    \node[box, fill=green!10] (be) at (5, 0) {Backend\\Express + TypeORM\\:3000};
+    \node[db, fill=orange!10] (db) at (10, 0) {(PostgreSQL)};
+
+    \draw[arr] (fe) -- node[above, font=\scriptsize]{HTTP/JSON + JWT} (be);
+    \draw[arr] (be) -- node[above, font=\scriptsize]{SQL} (db);
+  \end{tikzpicture}
+  \caption{Arquitectura general del sistema}
+  \label{fig:arquitectura}
+\end{figure}
+
+\textbf{Patrones y decisiones de diseño:}
+\begin{itemize}
+  \item \textbf{Monorepo funcional:} Directorios \texttt{backend/} y \texttt{frontend/} con dependencias independientes gestionadas por pnpm.
+  \item \textbf{Capas en backend:} Rutas $\rightarrow$ Controladores $\rightarrow$ Repositorios TypeORM.
+  \item \textbf{API REST:} Endpoints JSON bajo el prefijo \texttt{/api}.
+  \item \textbf{SPA:} El frontend es una Single Page Application con enrutamiento del lado del cliente.
+  \item \textbf{Seed de datos:} Al iniciar el servidor se cargan datos de prueba si las tablas están vacías.
+  \item \textbf{CI/CD:} GitHub Actions ejecuta lint, build y smoke test en cada push a \texttt{master}.
+\end{itemize}
+
+\pagebreak
+\section{Estructura del código}
+
+\subsection{Backend}
+
+\begin{lstlisting}[language=bash, caption={Estructura del directorio backend/src/}]
+backend/src/
+  servidor.js              # Bootstrap Express, CORS, montaje de routers
+  configuracion/env.js     # Variables de entorno
+  database/database.js     # Conexion TypeORM y seed de datos
+  schema/                  # 5 EntitySchema (usuarios, asignaciones, etc.)
+  routes/                  # login, asignaciones, contratospersonal, contratosejecutivo
+  controllers/             # Logica de negocio y estados calculados
+\end{lstlisting}
+
+\textbf{Archivos clave:}
+\begin{itemize}
+  \item \texttt{servidor.js}: Inicializa Express, habilita CORS para desarrollo, monta los cuatro routers bajo \texttt{/api} y conecta PostgreSQL antes de escuchar en el puerto configurado.
+  \item \texttt{asignaciones.controller.js}: Implementa \texttt{herramientasDeAcuerdoAUbicacion()} (bioseguridad para hospitales) y \texttt{calcularEstado()} para distribuciones según fecha de inicio y duración.
+  \item \texttt{contratospersonal.controller.js}: Calcula estados contractuales (\texttt{Pendiente}, \texttt{Activo}, \texttt{Próximo a vencer}, \texttt{Vencido}).
+  \item \texttt{login.controller.js}: Valida credenciales con bcrypt y emite JWT con vigencia de 8 horas.
+\end{itemize}
+
+\pagebreak
+\subsection{Frontend}
+
+\begin{lstlisting}[language=bash, caption={Estructura del directorio frontend/src/}]
+frontend/src/
+  main.jsx                 # Punto de entrada React
+  App.jsx                  # Rutas y guard de autenticacion
+  api.js                   # Cliente REST centralizado
+  Login.jsx                # Pagina de inicio de sesion
+  Dashboard.jsx            # Panel de modulos
+  Asignacion.jsx           # Evaluacion de volumen
+  DistribucionAsignacion.jsx  # Distribucion de personal
+  ContratosPersonal.jsx    # Contratos de trabajadores
+  ContratosEjecutivo.jsx   # Contratacion ejecutiva
+  GeneracionPagina.jsx     # Header, Sidebar, Layout compartido
+  style.css                # Import de Tailwind CSS
+\end{lstlisting}
+
+\textbf{Stack frontend:} React 19, Vite 8, react-router-dom 7, Tailwind CSS 4.
+
+El archivo \texttt{api.js} centraliza todas las llamadas HTTP con la función \texttt{requestAPIinterna()}, que adjunta automáticamente el header \texttt{Authorization: Bearer <token>} cuando existe sesión activa.
+
+% =============================================================================
+\clearpage
+\chapter{Conclusión del proyecto}
+% =============================================================================
+
+El proyecto entrega un prototipo funcional de sistema de gestión para una empresa de aseos de la Región del Bío-Bío. Se implementaron con éxito los módulos de autenticación, evaluación de volumen de personal, distribución de trabajadores, gestión de contratos de personal y registro de contratación ejecutiva, con persistencia en PostgreSQL y una interfaz web operativa.
+
+Los principales logros del desarrollo son:
+\begin{itemize}
+  \item API REST con 14 endpoints documentados y probados.
+  \item Modelo de datos con cinco entidades que cubren usuarios, asignaciones, distribución y contratos.
+  \item Interfaz de usuario coherente con navegación lateral y capturas de pantalla que evidencian su funcionamiento.
+  \item Medidas de seguridad básicas: hash de contraseñas, JWT y rate limiting en login.
+  \item Pipeline de integración continua con verificación automática de sintaxis, build y disponibilidad del backend.
+\end{itemize}
+
+Como limitaciones pendientes se identifican: la ausencia de middleware de validación JWT en el backend, la falta de tests unitarios automatizados, la edición incompleta de contratos ejecutivos en la UI, y la configuración de CORS abierta (\texttt{origin: '*'}) orientada solo a desarrollo.
+
+Como trabajo futuro se recomienda: implementar control de acceso basado en roles, desplegar en un entorno de producción con HTTPS, integrar notificaciones a trabajadores, y conectar con sistemas contables o el portal de Mercado Público según las necesidades de la empresa.
+
+% =============================================================================
+\clearpage
+\chapter{Bibliografía}
+% =============================================================================
+
+\begin{enumerate}
+  \item Meta Open Source. (2024). \textit{React Documentation}. \url{https://react.dev/}
+  \item Express.js. (2024). \textit{Express -- Node.js web application framework}. \url{https://expressjs.com/}
+  \item TypeORM. (2024). \textit{TypeORM Documentation}. \url{https://typeorm.io/}
+  \item PostgreSQL Global Development Group. (2024). \textit{PostgreSQL Documentation}. \url{https://www.postgresql.org/docs/}
+  \item Tailwind Labs. (2024). \textit{Tailwind CSS Documentation}. \url{https://tailwindcss.com/docs}
+  \item IETF. (2015). \textit{RFC 7519: JSON Web Token (JWT)}. \url{https://datatracker.ietf.org/doc/html/rfc7519}
+  \item Vite Team. (2024). \textit{Vite Guide}. \url{https://vite.dev/guide/}
+  \item ChileCompra. (2024). \textit{Portal Mercado Público}. \url{https://www.mercadopublico.cl/}
+  \item Instituto Nacional de Estadísticas de Chile. (2024). \textit{Índice de Precios al Consumidor (IPC)}. \url{https://www.ine.cl/}
+  \item Sommerville, I. (2015). \textit{Software Engineering} (10th ed.). Pearson Education.
+\end{enumerate}
+
+% =============================================================================
+\appendix
+\chapter{Instrumento y datos recopilados de análisis del contexto}
+% =============================================================================
+
+\section{Descripción del contexto organizacional}
+
+\textit{Extracto de levantamiento de información:}
+
+La empresa de aseos atiende clientes de la Región del Bío-Bío, ofreciendo servicios para instituciones públicas (hospitales, bancos, universidades) a través del mercado público y clientes privados por comunicación directa. Se provee personal de aseo con herramientas básicas; la cantidad de trabajadores depende del tipo de cliente y sus necesidades específicas.
+
+Los contratos varían entre 1 y 5 años. La empresa mantiene clientes frecuentes no exclusivos, pudiendo incorporar personal ante nuevas construcciones o redistribuir trabajadores en cambios menores. La oficina está en Concepción y no hay proyección de expansión a otras regiones.
+
+El personal fijo incluye dos contadores, un encargado de ventas y personal de operaciones. Cada cliente requiere un costeo distinto y las desviaciones presupuestarias deben negociarse, considerando ajustes por IPC en contratos plurianuales.
+
+\section{Propuesta inicial}
+
+\textit{Extracto de propuesta de solución:}
+
+\begin{itemize}
+  \item Asignar lugares y volumen de personal a enviar.
+  \item Asignar personal individualmente para una ubicación con instrucciones, herramientas y horamientos específicos.
+  \item Administrar contratos de personal y pagos.
+  \item Administrar contratos ejecutivos.
+\end{itemize}
+
+% =============================================================================
+\clearpage
+\chapter{Pruebas de API}
+% =============================================================================
+
+\section{Configuración del entorno de pruebas}
+
+\textbf{Credenciales de prueba:} usuario \texttt{admin}, contraseña \texttt{password}.
+
+\textbf{Ejecución del backend (Linux):}
+\begin{lstlisting}[language=bash]
+bash prueba_backend.sh
+\end{lstlisting}
+
+\textbf{Ejecución del frontend (Linux):}
+\begin{lstlisting}[language=bash]
+bash prueba_frontend.sh
+\end{lstlisting}
+
+El script \texttt{prueba\_backend.sh} levanta un contenedor Docker con PostgreSQL 13, configura las variables de entorno y ejecuta el servidor en modo desarrollo con nodemon.
+
+\section{Endpoints de autenticación}
+
+\begin{longtable}{@{}p{1.5cm}p{4cm}p{8cm}@{}}
+  \caption{Endpoint de autenticación} \\
+  \toprule
+  \textbf{Metodo} & \textbf{Ruta} & \textbf{Descripcion} \\
+  \midrule
+  \endfirsthead
+  POST & \texttt{/api/login} & Valida credenciales y retorna JWT. \\
+  \bottomrule
+\end{longtable}
+
+\textbf{Ejemplo curl:}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"usuario":"admin","contraseña":"password"}'
+\end{lstlisting}
+
+\textbf{Respuesta esperada:}
+\begin{lstlisting}
+{
+  "success": true,
+  "token": "eyJhbGciOiJIUzI1NiIs...",
+  "user": { "id": 1, "nombre": "Administrador", "rol": "admin" }
+}
+\end{lstlisting}
+
+\section{Endpoints de asignaciones}
+
+\begin{longtable}{@{}p{1.5cm}p{5.5cm}p{6.5cm}@{}}
+  \caption{Endpoints del módulo de asignaciones} \\
+  \toprule
+  \textbf{Metodo} & \textbf{Ruta} & \textbf{Descripcion} \\
+  \midrule
+  \endfirsthead
+  GET & \scriptsize\texttt{/api/asignacion} & Lista todas las asignaciones con resumen de personal. \\
+  POST & \scriptsize\texttt{/api/crearAsignacion} & Crea una nueva asignación. \\
+  GET & \scriptsize\texttt{/api/asignacion/:id/detalles} & Detalles, herramientas y estado. \\
+  GET & \scriptsize\texttt{/api/asignacion/:id/distribucion} & Distribución de personal asignado. \\
+  POST & \scriptsize\texttt{/api/asignacion/:id/personal/agregar} & Agrega trabajador a asignación. \\
+  POST & \scriptsize\texttt{/api/asignacion/:id/personal/remover} & Remueve trabajador de asignación. \\
+  GET & \scriptsize\texttt{/api/asignacion/:id/personal/detalles} & Detalles de tareas de un trabajador. \\
+  \bottomrule
+\end{longtable}
+
+\textbf{Ejemplo -- crear asignación:}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/crearAsignacion \
+  -H "Content-Type: application/json" \
+  -d '{
+    "cliente": "Hospital",
+    "ubicacion": "Concepcion - Pabellon Central",
+    "necesidad": "Limpieza diaria de areas comunes",
+    "personal": 4
+  }'
+\end{lstlisting}
+
+\textbf{Ejemplo -- listar asignaciones:}
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/asignacion
+\end{lstlisting}
+
+\pagebreak
+\section{Endpoints de contratos de personal}
+
+\begin{longtable}{@{}p{1.5cm}p{4.5cm}p{6.5cm}@{}}
+  \caption{Endpoints del módulo de contratos de personal} \\
+  \toprule
+  \textbf{Metodo} & \textbf{Ruta} & \textbf{Descripcion} \\
+  \midrule
+  \endfirsthead
+  GET & \scriptsize\texttt{/api/contratos/personal} & Lista IDs y nombres de trabajadores. \\
+  GET & \scriptsize\texttt{/api/contratos/personal/:id} & Detalle completo con estado calculado. \\
+  POST & \scriptsize\texttt{/api/contratos/personal} & Crea un nuevo contrato. \\
+  POST & \scriptsize\texttt{/api/contratos/personal/:id} & Modifica un contrato existente. \\
+  \bottomrule
+\end{longtable}
+
+\textbf{Ejemplo -- crear contrato:}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/contratos/personal \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nombre": "Pedro Soto",
+    "inicio": "2026-01-01",
+    "duracion": 3,
+    "salario": 380000,
+    "ipc": 3.5
+  }'
+\end{lstlisting}
+
+\section{Endpoints de contratos ejecutivos}
+
+\begin{longtable}{@{}p{1.5cm}p{4cm}p{6.5cm}@{}}
+  \caption{Endpoints del módulo de contratos ejecutivos} \\
+  \toprule
+  \textbf{Metodo} & \textbf{Ruta} & \textbf{Descripcion} \\
+  \midrule
+  \endfirsthead
+  GET & \scriptsize\texttt{/api/contratos/ejecutivo} & Lista todos los registros ejecutivos. \\
+  POST & \scriptsize\texttt{/api/contratos/ejecutivo} & Inicia proceso de contratación. \\
+  \bottomrule
+\end{longtable}
+
+\textbf{Ejemplo -- crear registro ejecutivo:}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/contratos/ejecutivo \
+  -H "Content-Type: application/json" \
+  -d '{
+    "nombre": "Laura Fernandez",
+    "cargo": "Contador",
+    "experiencia": 8,
+    "salario": 1000000,
+    "especializacion": "Tributaria",
+    "fecha_entrevista": "2026-08-15",
+    "prioridad": "Alta"
+  }'
+\end{lstlisting}
+
+\section{Resumen de endpoints}
+
+En total el sistema expone \textbf{14 endpoints} bajo el prefijo \texttt{/api}, distribuidos en cuatro módulos: autenticación (1), asignaciones (7), contratos de personal (4) y contratos ejecutivos (2).
+
+\end{document}
