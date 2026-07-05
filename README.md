@@ -10,11 +10,53 @@ Para desarrollar y ejecutar este proyecto se requieren las siguientes herramient
 - **Node.js** >= 20 (recomendado: v22 LTS)
 - **pnpm** >= 9 (el proyecto usa pnpm para la gestion de paquetes)
 - **PostgreSQL** >= 13 (el backend usa TypeORM con PostgreSQL)
-- **Docker** => usado por `prueba_backend.sh` para levantar una base de datos temporal, y puede ser opcionalmente usado en produccion con el script `instalar.sh` para configurar el entorno de produccion, aunque esto requiere que se use un proxy como nginx para exponer el servicio. una configuracion de ejemplo para nginx esta en `server/nginx.conf`
+- **Docker** >= usado por [`prueba_backend.sh`](prueba_backend.sh) para levantar una base de datos temporal en desarrollo; opcionalmente en produccion, usado por [`instalar.sh`](instalar.sh)
 
-## Uso del script de instalacion / Dependencias
+## Uso del script de instalacion (produccion)
 
-En progreso
+El script [`instalar.sh`](instalar.sh) levanta el entorno de produccion con Docker Compose: PostgreSQL, backend y frontend (Nginx con proxy a `/api`). No requiere instalar Node.js, pnpm ni PostgreSQL en el host.
+
+### Requerimientos
+
+- **Sistema operativo** >= Linux (ejemplo: Debian 12 o Ubuntu 22.04+)
+- **Docker** >= con el plugin **Docker Compose** (`docker compose`)
+- **OpenSSL** >= usado por el script para generar secrets (`JWT_SECRET`, contraseñas de DB)
+
+### Ejemplo en Debian
+
+```bash
+# Instalar dependencias del host
+sudo apt update
+sudo apt install -y docker.io docker-compose-plugin openssl
+
+# Habilitar y arrancar Docker
+sudo systemctl enable --now docker
+
+# (Opcional) Permitir usar Docker sin sudo; requiere cerrar sesion y volver a entrar
+sudo usermod -aG docker $USER
+```
+
+### Instalar la aplicacion
+
+Desde la raiz del repositorio:
+
+```bash
+bash instalar.sh
+```
+
+El script crea `.env` a partir de [`.env.example`](.env.example), genera secrets aleatorios y ejecuta `docker compose up`. La aplicacion queda disponible en `http://localhost` (puerto configurable con `HTTP_PORT` en `.env`).
+
+Comandos utiles despues de la instalacion:
+
+```bash
+docker compose ps          # estado de los contenedores
+docker compose logs -f     # ver logs en tiempo real
+docker compose down        # detener y remover contenedores
+```
+
+La configuracion de Nginx para produccion esta en [`server/nginx.conf`](server/nginx.conf). Si mas adelante se expone el servicio detras de un reverse proxy externo con HTTPS, ese proxy puede apuntar al puerto `HTTP_PORT` del host.
+
+## Desarrollo local
 
 ### Instalacion de dependencias
 
