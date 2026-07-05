@@ -14,4 +14,4 @@ fi
 
 echo "ejecutando el frontend..."
 echo "presiona ctrl+c para detener el frontend"
-$COMANDO_NPM run dev
+VITE_API_BASE=http://localhost:3000/api $COMANDO_NPM run dev

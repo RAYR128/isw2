@@ -1,7 +1,7 @@
 import "reflect-metadata";
 import express from "express";
 import cors from "cors";
-import { HOST, PORT } from "./configuracion/env.js";
+import { CORS_ORIGIN, HOST, NODE_ENV, PORT, SEED_DB } from "./configuracion/env.js";
 import loginRouter from "./routes/login.js";
 import contratosPersonalRouter from "./routes/contratospersonal.js";
 import contratosEjecutivoRouter from "./routes/contratosejecutivo.js";
@@ -11,14 +11,16 @@ import { connectDB, inicializarValoresPruebaDB } from "./database/database.js";
 const app = express();
 app.use(express.json());
 
-// No se si hay una mejor manera de hacer esto por ahora, pero cuando se tenga que hacer deploy de manera real, hay que configurar esto con ENV
-// de manera correcta, por ahora es asi para desarrollo, ya que o si no la mayoria de los exploradores (Firefox en mi caso) no permite utilizar el backend
-// desde el frontend de prueba
-app.use(cors({
-	origin:'*',
-	methods:['GET','POST','PUT','DELETE','OPTIONS'],
-	allowedHeaders:['Content-Type','Authorization']
-}))
+const corsOptions = {
+	methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+	allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+if (NODE_ENV !== "production") {
+	app.use(cors({ ...corsOptions, origin: "*" }));
+} else if (CORS_ORIGIN) {
+	app.use(cors({ ...corsOptions, origin: CORS_ORIGIN }));
+}
 
 // rutas API
 app.use('/api', loginRouter);
@@ -29,10 +31,12 @@ app.use('/api', asignacionesRouter);
 // Inicializa la conexión a la base de datos + seed de datos de prueba
 connectDB()
 	.then(async () => {
-		try {
-			await inicializarValoresPruebaDB();
-		} catch (seedErr) {
-			console.error("Advertencia: Error durante el seeding (continua sin datos iniciales):", seedErr.message);
+		if (SEED_DB) {
+			try {
+				await inicializarValoresPruebaDB();
+			} catch (seedErr) {
+				console.error("Advertencia: Error durante el seeding (continua sin datos iniciales):", seedErr.message);
+			}
 		}
 
 		app.listen(PORT, () => {

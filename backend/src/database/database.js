@@ -1,6 +1,6 @@
 "use strict";
 import { createConnection } from "typeorm";
-import { DATABASE, DB_USERNAME, HOST, PASSWORD, DB_PORT } from "../configuracion/env.js";
+import { DATABASE, DB_HOST, DB_USERNAME, PASSWORD, DB_PORT } from "../configuracion/env.js";
 import { getRepository } from "typeorm";
 import { Usuario } from "../schema/usuario.js";
 import { Asignacion } from "../schema/asignacion.js";
@@ -15,7 +15,7 @@ export async function connectDB() {
 	try {
 		connection = await createConnection({
 			type: "postgres",
-			host: `${HOST}`,
+			host: `${DB_HOST}`,
 			port: DB_PORT,
 			username: `${DB_USERNAME}`,
 			password: `${PASSWORD}`,

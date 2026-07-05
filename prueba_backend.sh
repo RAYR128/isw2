@@ -33,6 +33,8 @@ fi
 # configurar el entorno para el servidor
 echo "configurando el entorno"
 export HOST="localhost"
+export DB_HOST="localhost"
+export SEED_DB="true"
 export DB_PORT="$DB_PORT"
 export DB_USERNAME="$DB_USER"
 export DB_PASSWORD="$DB_PASSWORD"

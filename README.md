@@ -10,7 +10,11 @@ Para desarrollar y ejecutar este proyecto se requieren las siguientes herramient
 - **Node.js** >= 20 (recomendado: v22 LTS)
 - **pnpm** >= 9 (el proyecto usa pnpm para la gestion de paquetes)
 - **PostgreSQL** >= 13 (el backend usa TypeORM con PostgreSQL)
-- **Docker** (**opcional**: usado por `prueba_backend.sh` para levantar una base de datos temporal, no necesario en prod)
+- **Docker** => usado por `prueba_backend.sh` para levantar una base de datos temporal, y puede ser opcionalmente usado en produccion con el script `instalar.sh` para configurar el entorno de produccion, aunque esto requiere que se use un proxy como nginx para exponer el servicio. una configuracion de ejemplo para nginx esta en `server/nginx.conf`
+
+## Uso del script de instalacion / Dependencias
+
+En progreso
 
 ### Instalacion de dependencias
 
@@ -68,7 +72,6 @@ bash prueba_frontend.sh
 ```
 
 # Detalles de implementacion
-Trabajo en progreso, no completos aun, esto es una especificacion hasta ahora.
 
 ## Desarrollo actual
 * [X] implementacion de stubs de backend
