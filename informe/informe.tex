@@ -628,7 +628,7 @@ El proyecto entrega un prototipo funcional de sistema de gestión para una empre
 
 Los principales logros del desarrollo son:
 \begin{itemize}
-  \item API REST con 14 endpoints documentados y probados.
+  \item API REST con 18 endpoints documentados y probados.
   \item Modelo de datos con cinco entidades que cubren usuarios, asignaciones, distribución y contratos.
   \item Interfaz de usuario coherente con navegación lateral y capturas de pantalla que evidencian su funcionamiento.
   \item Medidas de seguridad básicas: hash de contraseñas, JWT y rate limiting en login.
@@ -704,6 +704,7 @@ bash prueba_frontend.sh
 
 El script \texttt{prueba\_backend.sh} levanta un contenedor Docker con PostgreSQL 13, configura las variables de entorno y ejecuta el servidor en modo desarrollo con nodemon.
 
+\pagebreak
 \section{Endpoints de autenticación}
 
 \begin{longtable}{@{}p{1.5cm}p{4cm}p{8cm}@{}}
@@ -732,6 +733,7 @@ curl -X POST http://localhost:3000/api/login \
 }
 \end{lstlisting}
 
+\pagebreak
 \section{Endpoints de asignaciones}
 
 \begin{longtable}{@{}p{1.5cm}p{5.5cm}p{6.5cm}@{}}
@@ -780,6 +782,7 @@ curl http://localhost:3000/api/asignacion
   GET & \scriptsize\texttt{/api/contratos/personal/:id} & Detalle completo con estado calculado. \\
   POST & \scriptsize\texttt{/api/contratos/personal} & Crea un nuevo contrato. \\
   POST & \scriptsize\texttt{/api/contratos/personal/:id} & Modifica un contrato existente. \\
+  DELETE & \scriptsize\texttt{/api/contratos/personal/:id} & Elimina un contrato. \\
   \bottomrule
 \end{longtable}
 
@@ -796,6 +799,22 @@ curl -X POST http://localhost:3000/api/contratos/personal \
   }'
 \end{lstlisting}
 
+\textbf{Ejemplo -- eliminar contrato de personal:}
+\begin{lstlisting}[language=bash]
+curl -X DELETE http://localhost:3000/api/contratos/personal/1
+\end{lstlisting}
+
+\textbf{Respuesta esperada (eliminación exitosa):}
+\begin{lstlisting}
+{ "mensaje": "Contrato eliminado exitosamente" }
+\end{lstlisting}
+
+\textbf{Respuesta esperada (trabajador asignado, HTTP 409):}
+\begin{lstlisting}
+{ "mensaje": "No se puede eliminar: el trabajador esta asignado a una asignacion" }
+\end{lstlisting}
+
+\pagebreak
 \section{Endpoints de contratos ejecutivos}
 
 \begin{longtable}{@{}p{1.5cm}p{4cm}p{6.5cm}@{}}
@@ -806,6 +825,9 @@ curl -X POST http://localhost:3000/api/contratos/personal \
   \endfirsthead
   GET & \scriptsize\texttt{/api/contratos/ejecutivos} & Lista todos los registros ejecutivos. \\
   POST & \scriptsize\texttt{/api/contratos/ejecutivos} & Inicia proceso de contratación. \\
+  GET & \scriptsize\texttt{/api/contratos/ejecutivos/:id} & Detalle completo de un contrato ejecutivo. \\
+  POST & \scriptsize\texttt{/api/contratos/ejecutivos/:id} & Modifica contrato existente (campos parciales). \\
+  DELETE & \scriptsize\texttt{/api/contratos/ejecutivos/:id} & Elimina un contrato ejecutivo. \\
   \bottomrule
 \end{longtable}
 
@@ -824,8 +846,35 @@ curl -X POST http://localhost:3000/api/contratos/ejecutivos \
   }'
 \end{lstlisting}
 
+\textbf{Ejemplo -- consultar contrato ejecutivo:}
+\begin{lstlisting}[language=bash]
+curl http://localhost:3000/api/contratos/ejecutivos/1
+\end{lstlisting}
+
+\textbf{Ejemplo -- modificar contrato ejecutivo:}
+\begin{lstlisting}[language=bash]
+curl -X POST http://localhost:3000/api/contratos/ejecutivos/1 \
+  -H "Content-Type: application/json" \
+  -d '{
+    "salario": 1100000,
+    "prioridad": "Media",
+    "comentarios": "Segunda entrevista programada"
+  }'
+\end{lstlisting}
+
+\textbf{Ejemplo -- eliminar contrato ejecutivo:}
+\begin{lstlisting}[language=bash]
+curl -X DELETE http://localhost:3000/api/contratos/ejecutivos/1
+\end{lstlisting}
+
+\textbf{Respuesta esperada (eliminación exitosa):}
+\begin{lstlisting}
+{ "mensaje": "Contrato ejecutivo eliminado exitosamente" }
+\end{lstlisting}
+
+\pagebreak
 \section{Resumen de endpoints}
 
-En total el sistema expone \textbf{14 endpoints} bajo el prefijo \texttt{/api}, distribuidos en cuatro módulos: autenticación (1), asignaciones (7), contratos de personal (4) y contratos ejecutivos (2).
+En total el sistema expone \textbf{18 endpoints} bajo el prefijo \texttt{/api}, distribuidos en cuatro módulos: autenticación (1), asignaciones (7), contratos de personal (5) y contratos ejecutivos (5).
 
 \end{document}
