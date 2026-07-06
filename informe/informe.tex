@@ -225,6 +225,7 @@ El software propuesto contempla los siguientes límites de alcance:
   \item La validación del token JWT se realiza solo en el frontend; el backend no verifica el token en rutas protegidas.
 \end{itemize}
 
+\pagebreak
 \section{Requerimientos No Funcionales del Sw}
 
 \begin{table}[htbp]
@@ -245,6 +246,7 @@ El software propuesto contempla los siguientes límites de alcance:
   \end{tabular}
 \end{table}
 
+\pagebreak
 \section{Interfaces externas de entrada}
 
 \begin{table}[htbp]
@@ -315,7 +317,7 @@ El sistema utiliza PostgreSQL como motor de base de datos, gestionado mediante T
       {asignaciones\_personal\\\scriptsize id, asignacion\_id,\\contrato\_personal\_id, turno,\\inicio, duracion, detalles};
 
     % contratos_e
-    \node[entity, below=2.8cm of contratos_p] (contratos_e) 
+    \node[entity, below=1.2cm of contratos_p] (contratos_e) 
       {contratos\_ejecutivo\\\scriptsize id, nombre, cargo, experiencia,\\salario, especializacion, estado};
 
     \draw[rel] (asignaciones) -- node[above, font=\scriptsize]{1:N} (asig_pers);
@@ -326,6 +328,7 @@ El sistema utiliza PostgreSQL como motor de base de datos, gestionado mediante T
 \end{figure}
 
 Las relaciones entre \texttt{asignaciones\_personal} y las tablas padre son lógicas (sin claves foráneas declaradas en TypeORM). El campo \texttt{contrato\_personal\_id} vincula cada distribución con un trabajador contratado.
+\pagebreak
 
 \section{Actores Casos de uso}
 
