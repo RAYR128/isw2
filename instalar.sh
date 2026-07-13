@@ -51,7 +51,7 @@ if [ ! -f "$ENV_FILE" ]; then
 	reemplazar_en_env "NODE_ENV" "production" "$ENV_FILE"
 	reemplazar_en_env "DB_HOST" "db" "$ENV_FILE"
 	reemplazar_en_env "SEED_DB" "false" "$ENV_FILE"
-	reemplazar_en_env "HTTP_PORT" "80" "$ENV_FILE"
+	reemplazar_en_env "HTTP_PORT" "2004" "$ENV_FILE"
 
 	echo "secretos generados y guardados en .env"
 else
@@ -78,11 +78,12 @@ for i in $(seq 1 30); do
 done
 
 HTTP_PORT="$(grep '^HTTP_PORT=' "$ENV_FILE" | cut -d= -f2-)"
-HTTP_PORT="${HTTP_PORT:-80}"
+HTTP_PORT="${HTTP_PORT:-2004}"
 
 echo ""
 echo "Instalacion completada."
-echo "Aplicacion disponible en: http://localhost:${HTTP_PORT}"
+echo "Aplicacion disponible en: http://0.0.0.0:${HTTP_PORT} (puerto publico ${HTTP_PORT})"
+echo "  local: http://localhost:${HTTP_PORT}"
 echo ""
 echo "Comandos utiles:"
 echo "  docker compose ps"
